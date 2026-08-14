@@ -1,0 +1,75 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.blog-card {
+  @include card-surface;
+  @include card-hover;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card__image-link {
+  position: relative;
+  display: block;
+}
+
+.blog-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.blog-card__category {
+  position: absolute;
+  top: $space-3;
+  left: $space-3;
+  padding: $space-1 $space-3;
+  background: $color-accent;
+  color: $color-charcoal;
+  font-size: $fs-xs;
+  font-weight: $fw-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: $radius-pill;
+}
+
+.blog-card__body {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  flex: 1;
+}
+
+.blog-card__date {
+  font-size: $fs-xs;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.blog-card__title {
+  font-size: $fs-lg;
+  margin: 0;
+
+  a {
+    color: $color-primary;
+    @include motion-safe-transition(color);
+
+    &:hover {
+      color: $color-accent-dark;
+    }
+  }
+}
+
+.blog-card__excerpt {
+  @include line-clamp(3);
+  margin: 0;
+  flex: 1;
+}
+
+.blog-card__link {
+  margin-top: $space-2;
+}

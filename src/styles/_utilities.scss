@@ -1,0 +1,533 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.container {
+  @include container;
+}
+
+.container--narrow {
+  @include container($container-narrow);
+}
+
+.section {
+  @include section-padding;
+}
+
+.section--alt {
+  background: $color-bg-alt;
+}
+
+.section--dark {
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+
+  p {
+    color: $color-text-inverse-muted;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: $color-text-inverse;
+  }
+}
+
+// ---- Icons (Material Symbols, loaded via index.html) ------------------------
+.icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+}
+
+.icon--sm {
+  font-size: 18px;
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20;
+}
+
+.icon--lg {
+  font-size: 32px;
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 40;
+}
+
+.icon--fill {
+  font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+
+// ---- Reusable card grids ----------------------------------------------------
+.card-grid {
+  display: grid;
+  gap: $space-6;
+  grid-template-columns: 1fr;
+
+  @include respond(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card-grid--3 {
+  @include respond(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card-grid--4 {
+  @include respond(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.section-footer-action {
+  display: flex;
+  justify-content: center;
+  margin-top: $space-8;
+}
+
+// ---- Logo grid (certifications, accreditations) -----------------------------
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-6;
+
+  @include respond(sm) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.logo-grid__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+  text-align: center;
+
+  img {
+    border-radius: $radius-sm;
+    filter: grayscale(1);
+    opacity: 0.75;
+    transition: all $transition-base;
+  }
+
+  &:hover img {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  span {
+    font-size: $fs-xs;
+    color: $color-text-muted;
+  }
+}
+
+// ---- Detail-page layout: main content + sidebar ------------------------------
+.detail-grid {
+  display: grid;
+  gap: $space-8;
+
+  @include respond(lg) {
+    grid-template-columns: 2fr 1fr;
+    gap: $space-10;
+  }
+}
+
+.detail-grid > :first-child h2 {
+  margin-top: 0;
+}
+
+.detail-grid h3 {
+  margin-top: $space-7;
+  margin-bottom: $space-4;
+}
+
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+    color: $color-text;
+  }
+
+  .icon {
+    color: $color-accent;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+}
+
+.process-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+
+  li {
+    display: flex;
+    gap: $space-4;
+  }
+
+  h4 {
+    margin-bottom: $space-1;
+    color: $color-primary;
+    font-family: $font-heading;
+    font-weight: $fw-semibold;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.process-list__number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $color-primary;
+  color: $color-white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $fw-semibold;
+}
+
+.sidebar-card {
+  @include card-surface;
+  padding: $space-6;
+  margin-bottom: $space-5;
+
+  h3 {
+    margin-bottom: $space-4;
+  }
+}
+
+.sidebar-card--cta {
+  background: $color-bg-alt;
+
+  p {
+    margin-bottom: $space-4;
+  }
+}
+
+// ---- Filter pill groups (projects, news) -----------------------------------
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-3;
+  margin-bottom: $space-5;
+}
+
+.filters__label {
+  font-size: $fs-sm;
+  font-weight: $fw-semibold;
+  color: $color-text-muted;
+  margin-right: $space-1;
+}
+
+.filter-pill {
+  padding: $space-2 $space-4;
+  border-radius: $radius-pill;
+  border: $border-width solid $color-border;
+  font-size: $fs-sm;
+  font-weight: $fw-medium;
+  color: $color-text;
+  background: $color-white;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+
+  &.is-active {
+    background: $color-primary;
+    border-color: $color-primary;
+    color: $color-white;
+  }
+}
+
+// ---- Split media/copy layout (about preview, culture, etc.) -----------------
+.about-preview__grid {
+  display: grid;
+  gap: $space-8;
+  align-items: center;
+
+  @include respond(lg) {
+    grid-template-columns: 1fr 1fr;
+    gap: $space-10;
+  }
+}
+
+.about-preview__media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: $radius-md;
+  box-shadow: $shadow-lg;
+}
+
+.about-preview__copy p {
+  margin-bottom: $space-4;
+}
+
+.about-preview__actions {
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+  flex-wrap: wrap;
+  margin-top: $space-6;
+}
+
+// ---- Value / advantage card --------------------------------------------------
+.value-card {
+  @include card-surface;
+  padding: $space-6;
+  text-align: center;
+  height: 100%;
+}
+
+.value-card__icon {
+  color: $color-accent;
+  margin-bottom: $space-3;
+}
+
+.value-card__title {
+  font-size: $fs-md;
+  margin-bottom: $space-2;
+}
+
+.value-card__description {
+  font-size: $fs-sm;
+  margin: 0;
+}
+
+.job-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+// ---- Detail page meta strip (project / job info) -----------------------------
+.project-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-5;
+  padding: $space-6;
+  margin-bottom: $space-8;
+  background: $color-bg-alt;
+  border-radius: $radius-md;
+
+  @include respond(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond(lg) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.project-meta__item {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+
+  .icon {
+    color: $color-accent;
+    margin-top: 2px;
+  }
+
+  span {
+    display: block;
+    font-size: $fs-xs;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  strong {
+    display: block;
+    color: $color-primary;
+    font-size: $fs-sm;
+  }
+}
+
+.project-progress {
+  margin-bottom: $space-8;
+}
+
+.project-progress__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $space-2;
+  font-weight: $fw-semibold;
+  color: $color-primary;
+}
+
+.project-progress__track {
+  height: 10px;
+  border-radius: $radius-pill;
+  background: $color-grey-300;
+  overflow: hidden;
+}
+
+.project-progress__fill {
+  height: 100%;
+  border-radius: $radius-pill;
+  background: linear-gradient(90deg, $color-accent 0%, $color-accent-dark 100%);
+}
+
+.stat-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: $space-3;
+    padding-bottom: $space-3;
+    border-bottom: $border-width solid $color-border;
+    font-size: $fs-sm;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+
+  span {
+    color: $color-text-muted;
+  }
+
+  strong {
+    color: $color-primary;
+    text-align: right;
+  }
+}
+
+.spin {
+  animation: spin 800ms linear infinite;
+
+  @include reduced-motion {
+    animation: none;
+  }
+}
+
+.form-row {
+  display: grid;
+  gap: $space-4;
+
+  @include respond(sm) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $space-3;
+  padding: $space-8 $space-5;
+  border-radius: $radius-md;
+}
+
+.form-feedback--success {
+  background: rgba(46, 125, 79, 0.08);
+  color: $color-success;
+
+  h3 {
+    color: $color-success;
+  }
+
+  p {
+    color: $color-text-muted;
+    margin-bottom: $space-2;
+  }
+}
+
+.form-feedback--error {
+  flex-direction: row;
+  justify-content: center;
+  padding: $space-4;
+  background: rgba(179, 38, 30, 0.08);
+  color: $color-error;
+  font-size: $fs-sm;
+  margin-bottom: $space-5;
+}
+
+.sr-only {
+  @include visually-hidden;
+}
+
+.skip-link {
+  @include visually-hidden;
+
+  &:focus {
+    position: fixed;
+    top: $space-3;
+    left: $space-3;
+    width: auto;
+    height: auto;
+    padding: $space-3 $space-5;
+    background: $color-accent;
+    color: $color-charcoal;
+    border-radius: $radius-sm;
+    font-weight: $fw-semibold;
+    z-index: $z-toast;
+    clip: auto;
+  }
+}
+
+// ---- Scroll-reveal animation ------------------------------------------------
+// Toggled by IntersectionObserver via the [appReveal] directive.
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity $transition-slow, transform $transition-slow;
+
+  @include reduced-motion {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

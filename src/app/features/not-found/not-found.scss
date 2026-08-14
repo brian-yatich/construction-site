@@ -1,0 +1,27 @@
+@use 'tokens' as *;
+
+.not-found {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.not-found__inner {
+  text-align: center;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.not-found__code {
+  display: block;
+  font-family: $font-heading;
+  font-weight: $fw-bold;
+  font-size: 6rem;
+  color: $color-accent;
+  line-height: 1;
+  margin-bottom: $space-4;
+}
+
+.not-found p {
+  margin-bottom: $space-6;
+}

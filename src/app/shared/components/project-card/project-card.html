@@ -1,0 +1,33 @@
+<a [routerLink]="['/projects', project().slug]" class="project-card">
+  <img [src]="project().thumbnailImage" [alt]="project().name" class="project-card__image" loading="lazy" width="800" height="1000" />
+  <span class="project-card__scrim" aria-hidden="true"></span>
+  <span class="project-card__status" [class.project-card__status--ongoing]="project().status === 'ongoing'">
+    {{ project().status === 'ongoing' ? 'Ongoing' : 'Completed' }}
+  </span>
+
+  <div class="project-card__content">
+    <span class="project-card__category">{{ project().categoryLabel }}</span>
+    <h3 class="project-card__title">{{ project().name }}</h3>
+    <p class="project-card__location">
+      <span class="icon icon--sm" aria-hidden="true">location_on</span>
+      {{ project().location }}
+    </p>
+
+    @if (showProgress() && project().status === 'ongoing' && project().progressPercent !== undefined) {
+      <div class="project-card__progress">
+        <div class="project-card__progress-track">
+          <div class="project-card__progress-fill" [style.width.%]="project().progressPercent"></div>
+        </div>
+        <div class="project-card__progress-meta">
+          <span>{{ project().progressPercent }}% Complete</span>
+          <span>Est. {{ project().completionDate | date: 'MMM y' }}</span>
+        </div>
+      </div>
+    }
+
+    <span class="project-card__link">
+      View Project
+      <span class="icon icon--sm" aria-hidden="true">arrow_forward</span>
+    </span>
+  </div>
+</a>

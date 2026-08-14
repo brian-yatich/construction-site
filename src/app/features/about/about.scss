@@ -1,0 +1,141 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.about-overview {
+  text-align: center;
+
+  h2 {
+    margin: $space-2 0 $space-5;
+  }
+
+  p {
+    margin-bottom: $space-4;
+  }
+}
+
+// ---- Mission / Vision -----------------------------------------------------
+.mission-vision {
+  display: grid;
+  gap: $space-6;
+
+  @include respond(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mission-vision__card {
+  @include card-surface;
+  padding: $space-7;
+
+  .icon {
+    color: $color-accent;
+    margin-bottom: $space-3;
+  }
+
+  h3 {
+    margin-bottom: $space-3;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+// ---- Core values ------------------------------------------------------------
+.core-values {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-4;
+
+  @include respond(sm) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond(lg) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.core-values__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-5 $space-3;
+  border: $border-width solid $color-border;
+  border-radius: $radius-md;
+  text-align: center;
+  font-weight: $fw-medium;
+  color: $color-primary;
+
+  .icon {
+    color: $color-accent;
+  }
+}
+
+// ---- Timeline -----------------------------------------------------------------
+.timeline {
+  position: relative;
+  max-width: 760px;
+  margin-inline: auto;
+  padding-left: $space-8;
+  border-left: 2px solid $color-border;
+}
+
+.timeline__item {
+  position: relative;
+  padding-bottom: $space-8;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(-#{$space-8} - 6px);
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $color-accent;
+    border: 3px solid $color-white;
+    box-shadow: 0 0 0 2px $color-accent;
+  }
+}
+
+.timeline__year {
+  display: inline-block;
+  font-family: $font-heading;
+  font-weight: $fw-semibold;
+  color: $color-accent-dark;
+  margin-bottom: $space-1;
+}
+
+.timeline__content h3 {
+  margin-bottom: $space-2;
+}
+
+.timeline__content p {
+  margin: 0;
+}
+
+// ---- Commitment cards -------------------------------------------------------
+.commitment-card {
+  @include card-surface;
+  padding: $space-7;
+  text-align: center;
+
+  .icon {
+    color: $color-accent;
+    margin-bottom: $space-3;
+  }
+
+  h3 {
+    margin-bottom: $space-3;
+  }
+
+  p {
+    margin: 0;
+  }
+}

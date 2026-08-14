@@ -1,0 +1,43 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.cta {
+  @include section-padding;
+  background: linear-gradient(120deg, $color-primary 0%, $color-primary-600 100%);
+  color: $color-white;
+}
+
+.cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-6;
+
+  @include respond(lg) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-8;
+  }
+}
+
+.cta__copy {
+  max-width: 560px;
+}
+
+.cta__title {
+  color: $color-white;
+  margin-bottom: $space-3;
+}
+
+.cta__description {
+  color: $color-text-inverse-muted;
+  margin: 0;
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-4;
+  flex-shrink: 0;
+}

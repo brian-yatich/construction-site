@@ -1,0 +1,30 @@
+<app-hero-section
+  [image]="heroImage"
+  title="Our Services"
+  subtitle="A full range of construction and civil engineering capabilities delivered under one accountable team."
+  [breadcrumbs]="[{ label: 'Services' }]"
+/>
+
+<section class="section">
+  <div class="container">
+    <app-section-header eyebrow="What We Do" title="Our Expertise" align="left" />
+
+    @if (loading()) {
+      <app-loading-spinner label="Loading services…" />
+    } @else if (hasError()) {
+      <app-error-state (retry)="load()" message="We couldn't load our services. Please try again." />
+    } @else {
+      <div class="card-grid card-grid--3">
+        @for (service of services(); track service.id) {
+          <app-service-card [service]="service" appReveal />
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<app-cta-section
+  title="Not Sure Which Service You Need?"
+  description="Talk to our team and we'll help scope your project."
+  [actions]="[{ label: 'Contact Us', path: '/contact', style: 'primary' }]"
+/>

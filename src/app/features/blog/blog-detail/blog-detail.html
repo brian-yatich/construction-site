@@ -1,0 +1,50 @@
+@if (loading()) {
+  <app-loading-spinner label="Loading article…" [fullHeight]="true" />
+} @else if (notFound()) {
+  <div class="container">
+    <app-empty-state icon="search_off" title="Article Not Found" message="This article doesn't exist or may have been moved.">
+      <a routerLink="/news" class="btn btn--primary">Back to News</a>
+    </app-empty-state>
+  </div>
+} @else if (post(); as article) {
+  <app-hero-section
+    [image]="article.featuredImage"
+    [title]="article.title"
+    [breadcrumbs]="[{ label: 'News', path: '/news' }, { label: article.title }]"
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="article-meta">
+        <span class="article-meta__category">{{ article.categoryLabel }}</span>
+        <span>By {{ article.author }}</span>
+        <span>&middot;</span>
+        <time [attr.datetime]="article.publishedDate">{{ article.publishedDate | date: 'mediumDate' }}</time>
+      </div>
+
+      <div class="article-body">
+        @for (paragraph of article.content; track paragraph) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
+
+      <a routerLink="/news" class="link">
+        <span class="icon icon--sm" aria-hidden="true">arrow_back</span>
+        Back to All Articles
+      </a>
+    </div>
+  </section>
+
+  @if (recentPosts().length) {
+    <section class="section section--alt">
+      <div class="container">
+        <app-section-header eyebrow="Keep Reading" title="More Articles" />
+        <div class="card-grid card-grid--3">
+          @for (recent of recentPosts(); track recent.id) {
+            <app-blog-card [post]="recent" />
+          }
+        </div>
+      </div>
+    </section>
+  }
+}

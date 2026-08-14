@@ -1,0 +1,17 @@
+<article class="blog-card">
+  <a [routerLink]="['/news', post().slug]" class="blog-card__image-link">
+    <img [src]="post().featuredImage" [alt]="post().title" class="blog-card__image" loading="lazy" width="1200" height="700" />
+    <span class="blog-card__category">{{ post().categoryLabel }}</span>
+  </a>
+  <div class="blog-card__body">
+    <time class="blog-card__date" [attr.datetime]="post().publishedDate">{{ post().publishedDate | date: 'mediumDate' }}</time>
+    <h3 class="blog-card__title">
+      <a [routerLink]="['/news', post().slug]">{{ post().title }}</a>
+    </h3>
+    <p class="blog-card__excerpt">{{ post().excerpt }}</p>
+    <a [routerLink]="['/news', post().slug]" class="link blog-card__link">
+      Read More
+      <span class="icon icon--sm" aria-hidden="true">arrow_forward</span>
+    </a>
+  </div>
+</article>

@@ -1,0 +1,154 @@
+<app-hero-section [image]="heroImage" size="full" [showScrollHint]="true"
+  title="Building Today. Engineering Tomorrow."
+  subtitle="We deliver reliable construction, civil engineering and infrastructure solutions through quality workmanship, innovative engineering and professional project management.">
+  <a routerLink="/request-quote" class="btn btn--primary">Request a Quote</a>
+  <a routerLink="/projects" class="btn btn--secondary">View Our Projects</a>
+</app-hero-section>
+
+<!-- Company Statistics -->
+<section class="section stats-band">
+  <div class="container stats-band__grid">
+    @for (stat of stats(); track stat.id) {
+      <app-statistic-card [stat]="stat" />
+    }
+  </div>
+</section>
+
+<!-- About Preview -->
+<section class="section about-preview">
+  <div class="container about-preview__grid">
+    <div class="about-preview__media" appReveal>
+      <img [src]="aboutImage" alt="[COMPANY NAME] team on a construction site" width="900" height="1000" loading="lazy" />
+    </div>
+    <div class="about-preview__copy" appReveal>
+      <span class="section-header__eyebrow">Who We Are</span>
+      <h2>Building Trust Through Engineering Excellence</h2>
+      <p>
+        [COMPANY NAME] is a construction and civil engineering company delivering building, infrastructure and road
+        projects with a focus on quality, safety and reliable project management. Our multidisciplinary teams bring
+        decades of combined experience to every stage of the project lifecycle, from feasibility through handover.
+      </p>
+      <p>
+        We combine technical expertise with disciplined project controls, giving our clients confidence in every
+        outcome we deliver.
+      </p>
+      <div class="about-preview__actions">
+        <a routerLink="/about" class="btn btn--outline">Learn More</a>
+        <a routerLink="/about" class="link">
+          Meet Our Team
+          <span class="icon icon--sm" aria-hidden="true">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Preview -->
+<section class="section section--alt">
+  <div class="container">
+    <app-section-header eyebrow="What We Do" title="Our Expertise"
+      description="A full range of construction and engineering capabilities delivered under one accountable team." />
+    <div class="card-grid card-grid--3">
+      @for (service of services(); track service.id) {
+        <app-service-card [service]="service" appReveal />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Featured Projects -->
+<section class="section">
+  <div class="container">
+    <app-section-header eyebrow="Our Work" title="Featured Projects"
+      description="A selection of projects that showcase our engineering capability and delivery track record." />
+    <div class="card-grid card-grid--4">
+      @for (project of featuredProjects(); track project.id) {
+        <app-project-card [project]="project" appReveal />
+      }
+    </div>
+    <div class="section-footer-action">
+      <a routerLink="/projects" class="btn btn--outline">View All Projects</a>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="section section--alt">
+  <div class="container">
+    <app-section-header eyebrow="Why Choose Us" title="Built on Experience and Integrity" />
+    <div class="values-grid">
+      @for (value of values(); track value.id) {
+        <div class="value-card" appReveal>
+          <span class="icon icon--lg value-card__icon" aria-hidden="true">{{ value.icon }}</span>
+          <h3 class="value-card__title">{{ value.title }}</h3>
+          <p class="value-card__description">{{ value.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Ongoing Projects -->
+@if (ongoingProjects().length) {
+  <section class="section">
+    <div class="container">
+      <app-section-header eyebrow="In Progress" title="Ongoing Projects"
+        description="Active projects currently under construction across our portfolio." />
+      <div class="card-grid card-grid--3">
+        @for (project of ongoingProjects(); track project.id) {
+          <app-project-card [project]="project" [showProgress]="true" appReveal />
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<!-- Certifications -->
+<section class="section section--alt certifications">
+  <div class="container">
+    <app-section-header eyebrow="Accreditation" title="Certifications" align="center" />
+    <div class="logo-grid">
+      @for (cert of certifications(); track cert.id) {
+        <div class="logo-grid__item">
+          <img [src]="cert.logo" [alt]="cert.name" width="240" height="140" loading="lazy" />
+          <span>{{ cert.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Clients and Partners -->
+<section class="section partners">
+  <div class="container">
+    <app-section-header eyebrow="Trusted By" title="Clients &amp; Partners" align="center" />
+  </div>
+  <div class="partners__track-wrapper">
+    <div class="partners__track">
+      @for (partner of partners(); track partner.id) {
+        <img [src]="partner.logo" [alt]="partner.name" width="200" height="100" loading="lazy" class="partners__logo" />
+      }
+      @for (partner of partners(); track partner.id + '-dup') {
+        <img [src]="partner.logo" [alt]="partner.name" width="200" height="100" loading="lazy" aria-hidden="true" class="partners__logo" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section section--alt">
+  <div class="container">
+    <app-section-header eyebrow="Client Feedback" title="What Our Clients Say" />
+    <app-testimonials-carousel [testimonials]="testimonials()" />
+  </div>
+</section>
+
+<!-- Final CTA -->
+<app-cta-section
+  title="Have a Construction Project in Mind?"
+  description="Talk to our team about your next project."
+  [actions]="[
+    { label: 'Request a Quote', path: '/request-quote', style: 'primary' },
+    { label: 'Contact Us', path: '/contact', style: 'secondary' }
+  ]"
+/>

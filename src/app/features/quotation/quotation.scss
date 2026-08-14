@@ -1,0 +1,7 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.quote-form-wrap {
+  @include card-surface;
+  padding: $space-7;
+}

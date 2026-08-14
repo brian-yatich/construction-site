@@ -1,0 +1,21 @@
+<section class="hero" [class.hero--full]="size() === 'full'" [style.background-image]="'url(' + image() + ')'">
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="container hero__content">
+    @if (breadcrumbs()) {
+      <app-breadcrumb [items]="breadcrumbs()!" class="hero__breadcrumb" />
+    }
+    <h1 class="hero__title">{{ title() }}</h1>
+    @if (subtitle()) {
+      <p class="hero__subtitle">{{ subtitle() }}</p>
+    }
+    <div class="hero__actions">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  @if (showScrollHint()) {
+    <div class="hero__scroll-hint" aria-hidden="true">
+      <span class="hero__scroll-mouse"></span>
+      <span class="hero__scroll-label">Scroll</span>
+    </div>
+  }
+</section>

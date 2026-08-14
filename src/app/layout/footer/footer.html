@@ -1,0 +1,90 @@
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col site-footer__col--brand">
+      <a routerLink="/" class="site-footer__logo">
+        <span class="icon site-footer__logo-icon" aria-hidden="true">foundation</span>
+        <span>[COMPANY NAME]</span>
+      </a>
+      <p class="site-footer__description">
+        We deliver reliable construction, civil engineering and infrastructure solutions through quality
+        workmanship, innovative engineering and professional project management.
+      </p>
+      <ul class="site-footer__social" aria-label="Social media">
+        <li>
+          <a href="#" aria-label="Facebook"><span class="icon" aria-hidden="true">public</span></a>
+        </li>
+        <li>
+          <a href="#" aria-label="LinkedIn"><span class="icon" aria-hidden="true">work</span></a>
+        </li>
+        <li>
+          <a href="#" aria-label="Instagram"><span class="icon" aria-hidden="true">photo_camera</span></a>
+        </li>
+        <li>
+          <a href="#" aria-label="YouTube"><span class="icon" aria-hidden="true">smart_display</span></a>
+        </li>
+      </ul>
+    </div>
+
+    <nav class="site-footer__col" aria-label="Quick links">
+      <h3 class="site-footer__heading">Quick Links</h3>
+      <ul>
+        @for (link of quickLinks; track link.path) {
+          <li><a [routerLink]="link.path">{{ link.label }}</a></li>
+        }
+      </ul>
+    </nav>
+
+    <nav class="site-footer__col" aria-label="Services">
+      <h3 class="site-footer__heading">Services</h3>
+      <ul>
+        @for (link of serviceLinks; track link.path) {
+          <li><a [routerLink]="link.path">{{ link.label }}</a></li>
+        }
+      </ul>
+    </nav>
+
+    <div class="site-footer__col">
+      <h3 class="site-footer__heading">Contact</h3>
+      <ul class="site-footer__contact">
+        <li><span class="icon icon--sm" aria-hidden="true">location_on</span><span>[COMPANY ADDRESS]</span></li>
+        <li><span class="icon icon--sm" aria-hidden="true">call</span><a href="tel:+10000000000">[COMPANY PHONE]</a></li>
+        <li><span class="icon icon--sm" aria-hidden="true">mail</span><a href="mailto:info@example.com">[COMPANY EMAIL]</a></li>
+      </ul>
+
+      <h3 class="site-footer__heading site-footer__heading--newsletter">Newsletter</h3>
+      @if (subscribed()) {
+        <p class="site-footer__newsletter-success">
+          <span class="icon icon--sm" aria-hidden="true">check_circle</span>
+          Thanks for subscribing.
+        </p>
+      } @else {
+        <form class="site-footer__newsletter" (ngSubmit)="subscribe()" novalidate>
+          <label for="newsletter-email" class="sr-only">Email address</label>
+          <input
+            id="newsletter-email"
+            type="email"
+            placeholder="Your email address"
+            [formControl]="newsletterEmail"
+            [class.is-invalid]="newsletterEmail.invalid && newsletterEmail.touched"
+          />
+          <button type="submit" class="btn btn--primary btn--sm" aria-label="Subscribe to newsletter">
+            <span class="icon icon--sm" aria-hidden="true">send</span>
+          </button>
+        </form>
+        @if (newsletterEmail.invalid && newsletterEmail.touched) {
+          <p class="form-error">Please enter a valid email address.</p>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <div class="container site-footer__bottom-inner">
+      <p>&copy; {{ currentYear }} [COMPANY NAME]. All Rights Reserved.</p>
+      <div class="site-footer__legal">
+        <a routerLink="/privacy-policy">Privacy Policy</a>
+        <a routerLink="/terms-conditions">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>

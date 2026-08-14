@@ -1,0 +1,24 @@
+@use 'tokens' as *;
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $space-3;
+  padding: $space-9 $space-4;
+}
+
+.state__icon {
+  color: $color-error;
+}
+
+.state__title {
+  color: $color-primary;
+  font-size: $fs-lg;
+}
+
+.state__message {
+  color: $color-text-muted;
+  max-width: 40ch;
+}

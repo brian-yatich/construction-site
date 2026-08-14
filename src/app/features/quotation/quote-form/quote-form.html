@@ -1,0 +1,140 @@
+@if (state() === 'success') {
+  <div class="form-feedback form-feedback--success">
+    <span class="icon icon--lg" aria-hidden="true">check_circle</span>
+    <h3>Quote Request Submitted</h3>
+    <p>
+      Thank you. Your reference number is <strong>{{ referenceId() }}</strong>. Our team will review your project
+      details and get back to you shortly.
+    </p>
+    <button type="button" class="btn btn--outline" (click)="resetForm()">Submit Another Request</button>
+  </div>
+} @else {
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    @if (state() === 'error') {
+      <div class="form-feedback form-feedback--error" role="alert">
+        <span class="icon" aria-hidden="true">error</span>
+        <span>Something went wrong submitting your request. Please try again.</span>
+      </div>
+    }
+
+    <div class="form-row">
+      <div class="form-field">
+        <label class="form-label" for="q-fullname">Full Name<span class="required">*</span></label>
+        <input id="q-fullname" type="text" class="form-control" formControlName="fullName" [class.is-invalid]="f.fullName.invalid && f.fullName.touched" />
+        @if (f.fullName.invalid && f.fullName.touched) {
+          <span class="form-error">Full name is required.</span>
+        }
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="q-company">Company</label>
+        <input id="q-company" type="text" class="form-control" formControlName="company" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label class="form-label" for="q-email">Email<span class="required">*</span></label>
+        <input id="q-email" type="email" class="form-control" formControlName="email" [class.is-invalid]="f.email.invalid && f.email.touched" />
+        @if (f.email.invalid && f.email.touched) {
+          <span class="form-error">Enter a valid email address.</span>
+        }
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="q-phone">Phone<span class="required">*</span></label>
+        <input id="q-phone" type="tel" class="form-control" formControlName="phone" [class.is-invalid]="f.phone.invalid && f.phone.touched" />
+        @if (f.phone.invalid && f.phone.touched) {
+          <span class="form-error">Enter a valid phone number.</span>
+        }
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label class="form-label" for="q-project-type">Project Type<span class="required">*</span></label>
+        <select id="q-project-type" class="form-control" formControlName="projectType" [class.is-invalid]="f.projectType.invalid && f.projectType.touched">
+          <option value="" disabled>Select a project type</option>
+          @for (type of projectTypeOptions; track type) {
+            <option [value]="type">{{ type }}</option>
+          }
+        </select>
+        @if (f.projectType.invalid && f.projectType.touched) {
+          <span class="form-error">Please select a project type.</span>
+        }
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="q-location">Project Location<span class="required">*</span></label>
+        <input id="q-location" type="text" class="form-control" formControlName="projectLocation" [class.is-invalid]="f.projectLocation.invalid && f.projectLocation.touched" />
+        @if (f.projectLocation.invalid && f.projectLocation.touched) {
+          <span class="form-error">Project location is required.</span>
+        }
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label class="form-label" for="q-budget">Estimated Budget</label>
+        <input id="q-budget" type="text" class="form-control" placeholder="e.g. $500,000 – $1,000,000" formControlName="estimatedBudget" />
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="q-start">Expected Start Date<span class="required">*</span></label>
+        <input id="q-start" type="date" class="form-control" formControlName="expectedStartDate" [class.is-invalid]="f.expectedStartDate.invalid && f.expectedStartDate.touched" />
+        @if (f.expectedStartDate.invalid && f.expectedStartDate.touched) {
+          <span class="form-error">Expected start date is required.</span>
+        }
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label class="form-label" for="q-completion">Expected Completion</label>
+      <input id="q-completion" type="date" class="form-control" formControlName="expectedCompletion" />
+    </div>
+
+    <div class="form-field">
+      <label class="form-label" for="q-description">Project Description<span class="required">*</span></label>
+      <textarea id="q-description" class="form-control" formControlName="projectDescription" [class.is-invalid]="f.projectDescription.invalid && f.projectDescription.touched"></textarea>
+      @if (f.projectDescription.invalid && f.projectDescription.touched) {
+        <span class="form-error">
+          @if (f.projectDescription.errors?.['required']) { Project description is required. }
+          @else if (f.projectDescription.errors?.['minlength']) { Please provide at least 20 characters. }
+        </span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label class="form-label" for="q-upload">Upload Documents</label>
+      <label for="q-upload" class="upload-dropzone">
+        <span class="icon icon--lg" aria-hidden="true">upload_file</span>
+        <span>Click to browse or drag files here</span>
+        <span class="form-hint">Site plans, drawings or reference documents (up to 5 files)</span>
+      </label>
+      <input id="q-upload" type="file" class="sr-only" multiple (change)="onFilesSelected($event)" />
+
+      @if (fileError()) {
+        <span class="form-error">{{ fileError() }}</span>
+      }
+
+      @if (selectedFiles().length) {
+        <ul class="upload-list">
+          @for (file of selectedFiles(); track file.name; let i = $index) {
+            <li>
+              <span class="icon icon--sm" aria-hidden="true">description</span>
+              <span class="upload-list__name">{{ file.name }}</span>
+              <button type="button" (click)="removeFile(i)" [attr.aria-label]="'Remove ' + file.name">
+                <span class="icon icon--sm" aria-hidden="true">close</span>
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+    <button type="submit" class="btn btn--primary btn--block" [disabled]="state() === 'submitting'">
+      @if (state() === 'submitting') {
+        <span class="icon icon--sm spin" aria-hidden="true">progress_activity</span>
+        Submitting…
+      } @else {
+        Request a Quote
+      }
+    </button>
+  </form>
+}

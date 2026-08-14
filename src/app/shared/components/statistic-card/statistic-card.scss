@@ -1,0 +1,30 @@
+@use 'tokens' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $space-2;
+  padding: $space-6 $space-4;
+}
+
+.statistic-card__icon {
+  color: $color-accent;
+  margin-bottom: $space-1;
+}
+
+.statistic-card__value {
+  font-family: $font-heading;
+  font-weight: $fw-bold;
+  font-size: $fs-4xl;
+  color: $color-white;
+  line-height: 1;
+}
+
+.statistic-card__label {
+  font-size: $fs-sm;
+  color: $color-text-inverse-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

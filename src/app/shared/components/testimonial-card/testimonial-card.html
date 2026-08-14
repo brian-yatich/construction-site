@@ -1,0 +1,13 @@
+<figure class="testimonial-card">
+  <span class="icon icon--lg testimonial-card__mark" aria-hidden="true">format_quote</span>
+  <blockquote class="testimonial-card__quote">{{ testimonial().quote }}</blockquote>
+  <figcaption class="testimonial-card__author">
+    @if (testimonial().photo) {
+      <img [src]="testimonial().photo" [alt]="testimonial().clientName" class="testimonial-card__photo" loading="lazy" width="56" height="56" />
+    }
+    <span>
+      <span class="testimonial-card__name">{{ testimonial().clientName }}</span>
+      <span class="testimonial-card__position">{{ testimonial().position }}, {{ testimonial().company }}</span>
+    </span>
+  </figcaption>
+</figure>

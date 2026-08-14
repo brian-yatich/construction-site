@@ -1,0 +1,61 @@
+<app-hero-section
+  [image]="heroImage"
+  title="Careers"
+  subtitle="Build your career with a team delivering meaningful construction and infrastructure projects."
+  [breadcrumbs]="[{ label: 'Careers' }]"
+/>
+
+<!-- Why work with us -->
+<section class="section">
+  <div class="container">
+    <app-section-header eyebrow="Why Join Us" title="Why Work With Us" />
+    <div class="card-grid card-grid--4">
+      @for (item of whyItems; track item.title) {
+        <div class="value-card" appReveal>
+          <span class="icon icon--lg value-card__icon" aria-hidden="true">{{ item.icon }}</span>
+          <h3 class="value-card__title">{{ item.title }}</h3>
+          <p class="value-card__description">{{ item.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Culture -->
+<section class="section section--alt">
+  <div class="container about-preview__grid">
+    <div class="about-preview__media" appReveal>
+      <img [src]="cultureImage" alt="Team collaborating on site" width="900" height="1000" loading="lazy" />
+    </div>
+    <div class="about-preview__copy" appReveal>
+      <span class="section-header__eyebrow">Our Culture</span>
+      <h2>A Team Built on Craft and Collaboration</h2>
+      <p>
+        Our people are our greatest asset. We invest in training, safety and career development so every team
+        member can grow alongside the projects we deliver. From site crews to engineering leadership, collaboration
+        and accountability define how we work.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Vacancies -->
+<section class="section" id="vacancies">
+  <div class="container">
+    <app-section-header eyebrow="Join Our Team" title="Current Vacancies" />
+
+    @if (loading()) {
+      <app-loading-spinner label="Loading vacancies…" />
+    } @else if (hasError()) {
+      <app-error-state (retry)="load()" message="We couldn't load current vacancies. Please try again." />
+    } @else if (jobs().length === 0) {
+      <app-empty-state icon="work_off" title="No Open Positions" message="There are no open vacancies right now. Check back soon." />
+    } @else {
+      <div class="job-list">
+        @for (job of jobs(); track job.id) {
+          <app-job-card [job]="job" appReveal />
+        }
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,5 @@
+@use 'tokens' as *;
+
+.filters:last-of-type {
+  margin-bottom: $space-8;
+}

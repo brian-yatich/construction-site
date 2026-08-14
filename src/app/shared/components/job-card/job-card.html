@@ -1,0 +1,13 @@
+<article class="job-card">
+  <div class="job-card__body">
+    <h3 class="job-card__title">{{ job().title }}</h3>
+    <ul class="job-card__meta">
+      <li><span class="icon icon--sm" aria-hidden="true">location_on</span>{{ job().location }}</li>
+      <li><span class="icon icon--sm" aria-hidden="true">work</span>{{ job().employmentType }}</li>
+      <li><span class="icon icon--sm" aria-hidden="true">apartment</span>{{ job().department }}</li>
+    </ul>
+    <p class="job-card__summary">{{ job().summary }}</p>
+    <p class="job-card__closing">Closing date: <time [attr.datetime]="job().closingDate">{{ job().closingDate | date: 'mediumDate' }}</time></p>
+  </div>
+  <a [routerLink]="['/careers', job().id]" class="btn btn--outline job-card__cta">View Position</a>
+</article>

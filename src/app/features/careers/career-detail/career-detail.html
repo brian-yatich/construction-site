@@ -1,0 +1,85 @@
+@if (loading()) {
+  <app-loading-spinner label="Loading position…" [fullHeight]="true" />
+} @else if (notFound()) {
+  <div class="container">
+    <app-empty-state icon="search_off" title="Position Not Found" message="This vacancy doesn't exist or may no longer be open.">
+      <a routerLink="/careers" class="btn btn--primary">Back to Careers</a>
+    </app-empty-state>
+  </div>
+} @else if (job(); as vacancy) {
+  <app-hero-section
+    [image]="heroImage"
+    [title]="vacancy.title"
+    [subtitle]="vacancy.summary"
+    [breadcrumbs]="[{ label: 'Careers', path: '/careers' }, { label: vacancy.title }]"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="project-meta">
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">location_on</span>
+          <div><span>Location</span><strong>{{ vacancy.location }}</strong></div>
+        </div>
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">work</span>
+          <div><span>Employment Type</span><strong>{{ vacancy.employmentType }}</strong></div>
+        </div>
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">apartment</span>
+          <div><span>Department</span><strong>{{ vacancy.department }}</strong></div>
+        </div>
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">event_busy</span>
+          <div><span>Closing Date</span><strong>{{ vacancy.closingDate | date: 'mediumDate' }}</strong></div>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+        <div>
+          <h2>Responsibilities</h2>
+          <ul class="check-list">
+            @for (item of vacancy.responsibilities; track item) {
+              <li><span class="icon icon--sm" aria-hidden="true">check_circle</span>{{ item }}</li>
+            }
+          </ul>
+
+          <h3>Requirements</h3>
+          <ul class="check-list">
+            @for (item of vacancy.requirements; track item) {
+              <li><span class="icon icon--sm" aria-hidden="true">check_circle</span>{{ item }}</li>
+            }
+          </ul>
+
+          <h3>Qualifications</h3>
+          <ul class="check-list">
+            @for (item of vacancy.qualifications; track item) {
+              <li><span class="icon icon--sm" aria-hidden="true">school</span>{{ item }}</li>
+            }
+          </ul>
+
+          <h3>Experience</h3>
+          <p>{{ vacancy.experience }}</p>
+        </div>
+
+        <aside>
+          <div class="sidebar-card">
+            <h3>Benefits</h3>
+            <ul class="check-list">
+              @for (item of vacancy.benefits; track item) {
+                <li><span class="icon icon--sm" aria-hidden="true">redeem</span>{{ item }}</li>
+              }
+            </ul>
+          </div>
+          <div class="sidebar-card sidebar-card--cta">
+            <h3>Ready to Apply?</h3>
+            <p>Send your application referencing this position before the closing date.</p>
+            <a [href]="'mailto:careers@example.com?subject=Application: ' + vacancy.title" class="btn btn--primary btn--block">
+              Apply Now
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+}

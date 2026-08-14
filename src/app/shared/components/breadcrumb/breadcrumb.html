@@ -1,0 +1,17 @@
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol class="breadcrumb__list">
+    <li class="breadcrumb__item">
+      <a routerLink="/" class="breadcrumb__link">Home</a>
+    </li>
+    @for (item of items(); track item.label) {
+      <li class="breadcrumb__item">
+        <span class="icon icon--sm breadcrumb__sep" aria-hidden="true">chevron_right</span>
+        @if (item.path) {
+          <a [routerLink]="item.path" class="breadcrumb__link">{{ item.label }}</a>
+        } @else {
+          <span class="breadcrumb__current" aria-current="page">{{ item.label }}</span>
+        }
+      </li>
+    }
+  </ol>
+</nav>

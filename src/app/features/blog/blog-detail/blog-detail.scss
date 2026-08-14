@@ -1,0 +1,32 @@
+@use 'tokens' as *;
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-3;
+  color: $color-text-muted;
+  font-size: $fs-sm;
+  margin-bottom: $space-6;
+}
+
+.article-meta__category {
+  padding: $space-1 $space-3;
+  background: $color-accent;
+  color: $color-charcoal;
+  font-weight: $fw-semibold;
+  font-size: $fs-xs;
+  text-transform: uppercase;
+  border-radius: $radius-pill;
+}
+
+.article-body {
+  margin-bottom: $space-8;
+
+  p {
+    margin-bottom: $space-5;
+    color: $color-text;
+    font-size: $fs-md;
+    line-height: $lh-normal;
+  }
+}

@@ -1,0 +1,179 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include heading-font;
+}
+
+h1 {
+  font-size: $fs-4xl;
+
+  @include respond(lg) {
+    font-size: $fs-5xl;
+  }
+}
+
+h2 {
+  font-size: $fs-3xl;
+
+  @include respond(lg) {
+    font-size: $fs-4xl;
+  }
+}
+
+h3 {
+  font-size: $fs-2xl;
+}
+
+h4 {
+  font-size: $fs-xl;
+}
+
+p {
+  color: $color-text-muted;
+}
+
+// ---- Links ------------------------------------------------------------------
+a.link {
+  color: $color-secondary;
+  font-weight: $fw-medium;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  @include motion-safe-transition(color);
+
+  &:hover {
+    color: $color-accent-dark;
+  }
+}
+
+// ---- Buttons ------------------------------------------------------------------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: $space-3 $space-6;
+  min-height: 48px;
+  font-family: $font-body;
+  font-weight: $fw-semibold;
+  font-size: $fs-base;
+  line-height: 1;
+  border-radius: $radius-sm;
+  border: $border-width solid transparent;
+  white-space: nowrap;
+  @include motion-safe-transition(all);
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn--primary {
+  background: $color-accent;
+  color: $color-charcoal;
+
+  &:hover:not(:disabled) {
+    background: $color-accent-dark;
+    color: $color-white;
+  }
+}
+
+.btn--secondary {
+  background: transparent;
+  color: $color-white;
+  border-color: rgba(255, 255, 255, 0.6);
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: $color-white;
+  }
+}
+
+.btn--outline {
+  background: transparent;
+  color: $color-primary;
+  border-color: $color-border;
+
+  &:hover:not(:disabled) {
+    border-color: $color-primary;
+    background: $color-grey-light;
+  }
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--sm {
+  min-height: 40px;
+  padding: $space-2 $space-4;
+  font-size: $fs-sm;
+}
+
+// ---- Form controls --------------------------------------------------------
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-bottom: $space-5;
+}
+
+.form-label {
+  font-size: $fs-sm;
+  font-weight: $fw-medium;
+  color: $color-text;
+
+  .required {
+    color: $color-error;
+    margin-left: $space-1;
+  }
+}
+
+.form-control {
+  width: 100%;
+  padding: $space-3 $space-4;
+  min-height: 48px;
+  font-size: $fs-base;
+  color: $color-text;
+  background: $color-white;
+  border: $border-width solid $color-border;
+  border-radius: $radius-sm;
+  @include motion-safe-transition(border-color);
+
+  &:hover {
+    border-color: $color-grey-500;
+  }
+
+  &:focus-visible {
+    border-color: $color-accent;
+  }
+
+  &.is-invalid {
+    border-color: $color-error;
+  }
+}
+
+textarea.form-control {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.form-error {
+  font-size: $fs-sm;
+  color: $color-error;
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+}
+
+.form-hint {
+  font-size: $fs-sm;
+  color: $color-text-muted;
+}

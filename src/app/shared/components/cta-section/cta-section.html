@@ -1,0 +1,24 @@
+<section class="cta">
+  <div class="container cta__inner">
+    <div class="cta__copy">
+      <h2 class="cta__title">{{ title() }}</h2>
+      @if (description()) {
+        <p class="cta__description">{{ description() }}</p>
+      }
+    </div>
+    @if (actions().length) {
+      <div class="cta__actions">
+        @for (action of actions(); track action.path) {
+          <a
+            class="btn"
+            [class.btn--primary]="(action.style ?? 'primary') === 'primary'"
+            [class.btn--secondary]="action.style === 'secondary'"
+            [routerLink]="action.path"
+          >
+            {{ action.label }}
+          </a>
+        }
+      </div>
+    }
+  </div>
+</section>

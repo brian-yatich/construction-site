@@ -1,0 +1,51 @@
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header" [class.site-header--scrolled]="scrolled()">
+  <div class="container site-header__bar">
+    <a routerLink="/" class="site-header__logo" aria-label="[COMPANY NAME] — Home">
+      <span class="icon site-header__logo-icon" aria-hidden="true">foundation</span>
+      <span class="site-header__logo-text">[COMPANY NAME]</span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Primary">
+      <ul>
+        @for (item of navItems; track item.path) {
+          <li>
+            <a [routerLink]="item.path" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a routerLink="/request-quote" class="btn btn--primary btn--sm site-header__cta">Request a Quote</a>
+      <button
+        type="button"
+        class="site-header__toggle"
+        (click)="toggleMobile()"
+        aria-controls="mobile-nav"
+        [attr.aria-expanded]="mobileOpen()"
+        aria-label="Toggle navigation menu"
+      >
+        <span class="icon icon--lg" aria-hidden="true">{{ mobileOpen() ? 'close' : 'menu' }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav-backdrop" [class.is-open]="mobileOpen()" (click)="closeMobile()" aria-hidden="true"></div>
+
+<nav id="mobile-nav" class="mobile-nav" [class.is-open]="mobileOpen()" aria-label="Mobile" [attr.inert]="mobileOpen() ? null : ''">
+  <ul>
+    @for (item of navItems; track item.path) {
+      <li>
+        <a [routerLink]="item.path" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: item.path === '/' }" (click)="closeMobile()">
+          {{ item.label }}
+        </a>
+      </li>
+    }
+  </ul>
+  <a routerLink="/request-quote" class="btn btn--primary btn--block" (click)="closeMobile()">Request a Quote</a>
+</nav>

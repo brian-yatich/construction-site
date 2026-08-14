@@ -1,0 +1,9 @@
+@use 'tokens' as *;
+
+h1 {
+  margin-bottom: $space-5;
+}
+
+p {
+  margin-bottom: $space-4;
+}

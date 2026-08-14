@@ -1,0 +1,64 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.upload-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  text-align: center;
+  padding: $space-8 $space-5;
+  border: 2px dashed $color-border;
+  border-radius: $radius-md;
+  cursor: pointer;
+  color: $color-text-muted;
+  @include motion-safe-transition(all);
+
+  .icon {
+    color: $color-accent;
+  }
+
+  &:hover {
+    border-color: $color-accent;
+    background: $color-bg-alt;
+  }
+}
+
+.upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-top: $space-4;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-3;
+    background: $color-bg-alt;
+    border-radius: $radius-sm;
+    font-size: $fs-sm;
+  }
+
+  .icon {
+    color: $color-accent;
+  }
+
+  button {
+    margin-left: auto;
+    color: $color-text-muted;
+    display: flex;
+
+    &:hover {
+      color: $color-error;
+    }
+  }
+}
+
+.upload-list__name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

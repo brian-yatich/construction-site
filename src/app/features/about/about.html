@@ -1,0 +1,140 @@
+<app-hero-section
+  [image]="heroImage"
+  title="About Our Company"
+  subtitle="Building trust through engineering excellence, safety and reliable delivery."
+  [breadcrumbs]="[{ label: 'About' }]"
+/>
+
+<!-- Overview -->
+<section class="section">
+  <div class="container container--narrow about-overview" appReveal>
+    <span class="section-header__eyebrow">Company Overview</span>
+    <h2>Who We Are</h2>
+    <p>
+      [COMPANY NAME] is a construction and civil engineering company delivering building, infrastructure and road
+      projects across the region. Since our founding, we have grown from a small building contractor into a
+      full-service construction and engineering firm trusted for our technical expertise, safety culture and
+      commitment to delivering on schedule.
+    </p>
+    <p>
+      Our multidisciplinary team of engineers, project managers and skilled tradespeople work together under one
+      accountable structure, giving our clients a single point of contact from feasibility through handover.
+    </p>
+  </div>
+</section>
+
+<!-- Mission / Vision -->
+<section class="section section--alt">
+  <div class="container mission-vision">
+    <div class="mission-vision__card" appReveal>
+      <span class="icon icon--lg" aria-hidden="true">flag</span>
+      <h3>Our Mission</h3>
+      <p>
+        To deliver construction and engineering solutions that meet the highest standards of quality, safety and
+        professionalism, building lasting value for our clients and communities.
+      </p>
+    </div>
+    <div class="mission-vision__card" appReveal>
+      <span class="icon icon--lg" aria-hidden="true">visibility</span>
+      <h3>Our Vision</h3>
+      <p>
+        To be a leading construction and engineering company recognized for innovation, reliability and excellence
+        in project delivery.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Core Values -->
+<section class="section">
+  <div class="container">
+    <app-section-header eyebrow="What Drives Us" title="Our Core Values" />
+    <div class="core-values">
+      @for (value of coreValues; track value.title) {
+        <div class="core-values__item" appReveal>
+          <span class="icon" aria-hidden="true">{{ value.icon }}</span>
+          <span>{{ value.title }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- History Timeline -->
+<section class="section section--alt">
+  <div class="container">
+    <app-section-header eyebrow="Our Journey" title="Company History" />
+    <ol class="timeline">
+      @for (event of timeline(); track event.title) {
+        <li class="timeline__item" appReveal>
+          <span class="timeline__year">{{ event.year }}</span>
+          <div class="timeline__content">
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.description }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- Leadership Team -->
+<section class="section" id="team">
+  <div class="container">
+    <app-section-header eyebrow="Leadership" title="Meet Our Team"
+      description="An experienced leadership team guiding our projects and people." />
+    <div class="card-grid card-grid--4">
+      @for (member of team(); track member.id) {
+        <app-team-card [member]="member" appReveal />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Certifications -->
+<section class="section section--alt">
+  <div class="container">
+    <app-section-header eyebrow="Accreditation" title="Certifications" />
+    <div class="logo-grid">
+      @for (cert of certifications(); track cert.id) {
+        <div class="logo-grid__item">
+          <img [src]="cert.logo" [alt]="cert.name" width="240" height="140" loading="lazy" />
+          <span>{{ cert.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Commitments -->
+<section class="section">
+  <div class="container">
+    <app-section-header eyebrow="Our Commitments" title="Safety, Quality &amp; Environment" />
+    <div class="card-grid card-grid--3">
+      <div class="commitment-card" appReveal>
+        <span class="icon icon--lg" aria-hidden="true">health_and_safety</span>
+        <h3>Safety Commitment</h3>
+        <p>Every site operates under a safety-first culture, with structured induction, training and inspection programs protecting our people and the public.</p>
+      </div>
+      <div class="commitment-card" appReveal>
+        <span class="icon icon--lg" aria-hidden="true">verified</span>
+        <h3>Quality Commitment</h3>
+        <p>Rigorous quality control processes are applied across design coordination, procurement and site execution to ensure consistent, lasting results.</p>
+      </div>
+      <div class="commitment-card" appReveal>
+        <span class="icon icon--lg" aria-hidden="true">eco</span>
+        <h3>Environmental Responsibility</h3>
+        <p>We manage environmental impact through responsible material sourcing, waste management and site practices on every project.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-cta-section
+  title="Want to Work With Us?"
+  description="Get in touch to discuss your next construction or engineering project."
+  [actions]="[
+    { label: 'Request a Quote', path: '/request-quote', style: 'primary' },
+    { label: 'Contact Us', path: '/contact', style: 'secondary' }
+  ]"
+/>

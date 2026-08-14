@@ -1,0 +1,36 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.team-card {
+  @include card-surface;
+  @include card-hover;
+  overflow: hidden;
+  text-align: center;
+}
+
+.team-card__photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.team-card__body {
+  padding: $space-5;
+}
+
+.team-card__name {
+  font-size: $fs-lg;
+  margin: 0 0 $space-1;
+}
+
+.team-card__role {
+  color: $color-accent-dark;
+  font-weight: $fw-medium;
+  font-size: $fs-sm;
+  margin: 0 0 $space-3;
+}
+
+.team-card__bio {
+  font-size: $fs-sm;
+  margin: 0;
+}

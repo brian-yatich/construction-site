@@ -1,0 +1,64 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.carousel {
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.carousel__viewport {
+  overflow: hidden;
+}
+
+.carousel__track {
+  display: flex;
+  @include motion-safe-transition(transform, $transition-slow);
+}
+
+.carousel__slide {
+  flex: 0 0 100%;
+  padding: $space-2;
+}
+
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-5;
+  margin-top: $space-6;
+}
+
+.carousel__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: $border-width solid $color-border;
+  color: $color-primary;
+  @include motion-safe-transition(all);
+
+  &:hover {
+    background: $color-primary;
+    border-color: $color-primary;
+    color: $color-white;
+  }
+}
+
+.carousel__dots {
+  display: flex;
+  gap: $space-2;
+}
+
+.carousel__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $color-grey-300;
+  @include motion-safe-transition(background);
+
+  &.is-active {
+    background: $color-accent;
+  }
+}

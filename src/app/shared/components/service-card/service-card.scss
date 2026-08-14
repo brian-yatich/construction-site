@@ -1,0 +1,85 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.service-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  @include motion-safe-transition(box-shadow);
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.service-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  @include motion-safe-transition(transform, $transition-slow);
+}
+
+.service-card:hover .service-card__image,
+.service-card:focus-visible .service-card__image {
+  @media (prefers-reduced-motion: no-preference) {
+    transform: scale(1.08);
+  }
+}
+
+.service-card__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 44, 70, 0.05) 0%, rgba(15, 27, 40, 0.35) 55%, rgba(11, 20, 31, 0.92) 100%);
+}
+
+.service-card__icon {
+  position: absolute;
+  top: $space-4;
+  left: $space-4;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-accent;
+  color: $color-charcoal;
+  border-radius: $radius-sm;
+  box-shadow: $shadow-md;
+}
+
+.service-card__content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: $space-6 $space-5;
+  color: $color-white;
+}
+
+.service-card__title {
+  color: $color-white;
+  font-size: $fs-lg;
+  margin: 0 0 $space-2;
+}
+
+.service-card__description {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: $fs-sm;
+  margin: 0 0 $space-3;
+  @include line-clamp(2);
+}
+
+.service-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  color: $color-accent-light;
+  font-weight: $fw-semibold;
+  font-size: $fs-sm;
+}

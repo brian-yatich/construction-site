@@ -1,0 +1,8 @@
+<div class="state" role="alert">
+  <span class="icon icon--lg state__icon" aria-hidden="true">error</span>
+  <h3 class="state__title">{{ title() }}</h3>
+  <p class="state__message">{{ message() }}</p>
+  @if (showRetry()) {
+    <button type="button" class="btn btn--outline btn--sm" (click)="retry.emit()">{{ retryLabel() }}</button>
+  }
+</div>

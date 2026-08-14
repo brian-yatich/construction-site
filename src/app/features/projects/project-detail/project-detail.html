@@ -1,0 +1,114 @@
+@if (loading()) {
+  <app-loading-spinner label="Loading project…" [fullHeight]="true" />
+} @else if (notFound()) {
+  <div class="container">
+    <app-empty-state icon="search_off" title="Project Not Found" message="The project you're looking for doesn't exist or may have been moved.">
+      <a routerLink="/projects" class="btn btn--primary">Back to Projects</a>
+    </app-empty-state>
+  </div>
+} @else if (project(); as proj) {
+  <app-hero-section
+    [image]="proj.heroImage"
+    [title]="proj.name"
+    [subtitle]="proj.summary"
+    [breadcrumbs]="[{ label: 'Projects', path: '/projects' }, { label: proj.name }]"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="project-meta">
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">location_on</span>
+          <div><span>Location</span><strong>{{ proj.location }}</strong></div>
+        </div>
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">category</span>
+          <div><span>Category</span><strong>{{ proj.categoryLabel }}</strong></div>
+        </div>
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">flag</span>
+          <div><span>Status</span><strong>{{ proj.status === 'ongoing' ? 'Ongoing' : 'Completed' }}</strong></div>
+        </div>
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">event</span>
+          <div><span>Start Date</span><strong>{{ proj.startDate | date: 'MMM y' }}</strong></div>
+        </div>
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">event_available</span>
+          <div><span>{{ proj.status === 'ongoing' ? 'Expected Completion' : 'Completion Date' }}</span><strong>{{ proj.completionDate | date: 'MMM y' }}</strong></div>
+        </div>
+        <div class="project-meta__item">
+          <span class="icon" aria-hidden="true">schedule</span>
+          <div><span>Duration</span><strong>{{ proj.durationMonths }} months</strong></div>
+        </div>
+      </div>
+
+      @if (proj.status === 'ongoing' && proj.progressPercent !== undefined) {
+        <div class="project-progress">
+          <div class="project-progress__header">
+            <span>Construction Progress</span>
+            <span>{{ proj.progressPercent }}%</span>
+          </div>
+          <div class="project-progress__track">
+            <div class="project-progress__fill" [style.width.%]="proj.progressPercent"></div>
+          </div>
+        </div>
+      }
+
+      <div class="detail-grid">
+        <div appReveal>
+          <h2>Project Description</h2>
+          <p>{{ proj.description }}</p>
+
+          <h3>Scope of Work</h3>
+          <ul class="check-list">
+            @for (item of proj.scopeOfWork; track item) {
+              <li><span class="icon icon--sm" aria-hidden="true">check_circle</span>{{ item }}</li>
+            }
+          </ul>
+        </div>
+
+        <aside appReveal>
+          <div class="sidebar-card">
+            <h3>Project Statistics</h3>
+            <ul class="stat-list">
+              @for (stat of proj.stats; track stat.label) {
+                <li><span>{{ stat.label }}</span><strong>{{ stat.value }}</strong></li>
+              }
+              <li><span>Client</span><strong>{{ proj.client }}</strong></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      @if (proj.gallery.length) {
+        <div class="project-gallery-wrap" appReveal>
+          <h2>Project Gallery</h2>
+          <app-project-gallery [images]="proj.gallery" [alt]="proj.name" />
+        </div>
+      }
+    </div>
+  </section>
+
+  @if (relatedProjects().length) {
+    <section class="section section--alt">
+      <div class="container">
+        <app-section-header eyebrow="More Work" title="Related Projects" />
+        <div class="card-grid card-grid--3">
+          @for (related of relatedProjects(); track related.id) {
+            <app-project-card [project]="related" appReveal />
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <app-cta-section
+    title="Interested in a Similar Project?"
+    description="Contact our team to discuss your project requirements."
+    [actions]="[
+      { label: 'Request a Quote', path: '/request-quote', style: 'primary' },
+      { label: 'Contact Us', path: '/contact', style: 'secondary' }
+    ]"
+  />
+}

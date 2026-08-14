@@ -1,0 +1,112 @@
+import { BlogPost } from '../models';
+import { unsplash, UNSPLASH } from './unsplash';
+
+const categoryLabel = (id: BlogPost['category']): string =>
+  ({
+    'company-news': 'Company News',
+    'project-updates': 'Project Updates',
+    construction: 'Construction',
+    engineering: 'Engineering',
+    safety: 'Safety',
+    sustainability: 'Sustainability',
+    technology: 'Technology',
+  }[id]);
+
+export const BLOG_MOCK: BlogPost[] = [
+  {
+    id: 'b1',
+    slug: 'northgate-ring-road-milestone',
+    title: 'Northgate Ring Road Expansion Reaches 60% Completion',
+    excerpt: 'The dual-carriageway expansion project has passed a major construction milestone ahead of its scheduled review.',
+    content: [
+      'The Northgate Ring Road Expansion has reached 60% physical completion, marking a significant milestone in the 28-month program.',
+      'Construction teams have completed the majority of earthworks and pavement reconstruction along the corridor, with junction works now underway at two of the three grade-separated interchanges.',
+      'Traffic management plans continue to keep the corridor operational throughout construction, with night-shift works minimizing disruption to daily commuters.',
+    ],
+    category: 'project-updates',
+    categoryLabel: categoryLabel('project-updates'),
+    author: '[AUTHOR NAME]',
+    publishedDate: '2026-06-12',
+    featuredImage: unsplash(UNSPLASH.roadTrack, 1200, 700),
+  },
+  {
+    id: 'b2',
+    slug: 'winter-site-safety-protocols',
+    title: 'Strengthening Site Safety Protocols for the Winter Season',
+    excerpt: 'An overview of the enhanced safety measures rolled out across all active sites ahead of winter conditions.',
+    content: [
+      'As winter conditions approach, all active project sites have implemented enhanced safety protocols covering cold-weather concreting, site access, and equipment operation.',
+      'Toolbox talks and refresher training have been scheduled across every crew, alongside updated risk assessments for weather-related hazards.',
+      'Safety remains the top operational priority across every phase of project delivery.',
+    ],
+    category: 'safety',
+    categoryLabel: categoryLabel('safety'),
+    author: '[AUTHOR NAME]',
+    publishedDate: '2026-05-28',
+    featuredImage: unsplash(UNSPLASH.workerHardHatFrame, 1200, 700),
+  },
+  {
+    id: 'b3',
+    slug: 'sustainable-materials-in-construction',
+    title: 'Evaluating Sustainable Materials for Long-Span Structures',
+    excerpt: 'A look at how low-carbon concrete mixes and recycled steel are being evaluated for upcoming structural projects.',
+    content: [
+      'Sustainability is increasingly central to material selection on structural projects, with low-carbon concrete mixes and high-recycled-content steel under active evaluation.',
+      'Early trials on select projects have shown promising performance results without compromising structural requirements.',
+      'Broader adoption will be phased in as testing and specification alignment continue.',
+    ],
+    category: 'sustainability',
+    categoryLabel: categoryLabel('sustainability'),
+    author: '[AUTHOR NAME]',
+    publishedDate: '2026-05-10',
+    featuredImage: unsplash(UNSPLASH.brownConcreteBuilding, 1200, 700),
+  },
+  {
+    id: 'b4',
+    slug: 'digital-twin-project-monitoring',
+    title: 'Piloting Digital Twin Technology for Project Monitoring',
+    excerpt: 'How real-time digital modeling is being trialed to improve visibility across active construction sites.',
+    content: [
+      'A digital twin pilot program is underway across two active sites, combining drone survey data with real-time progress modeling.',
+      'The technology aims to improve schedule visibility and early clash detection between structural and MEP systems.',
+      'Results from the pilot will inform a broader rollout across the project portfolio.',
+    ],
+    category: 'technology',
+    categoryLabel: categoryLabel('technology'),
+    author: '[AUTHOR NAME]',
+    publishedDate: '2026-04-22',
+    featuredImage: unsplash(UNSPLASH.blueprintsSpread, 1200, 700),
+  },
+  {
+    id: 'b5',
+    slug: 'engineering-approach-seismic-retrofit',
+    title: 'The Engineering Approach Behind Our Bridge Retrofit Program',
+    excerpt: 'A technical overview of the structural engineering methodology applied to the Harbor Bridge retrofit.',
+    content: [
+      'The Harbor Bridge structural retrofit required a detailed seismic assessment methodology to identify strengthening priorities across the structure.',
+      'Engineering teams combined finite element modeling with on-site load testing to validate the retrofit design.',
+      'The completed works extend the structure\'s service life while meeting current seismic performance standards.',
+    ],
+    category: 'engineering',
+    categoryLabel: categoryLabel('engineering'),
+    author: '[AUTHOR NAME]',
+    publishedDate: '2026-03-30',
+    featuredImage: unsplash(UNSPLASH.concreteBridgeLandscape, 1200, 700),
+  },
+  {
+    id: 'b6',
+    slug: 'company-announces-new-regional-office',
+    title: 'Company Announces New Regional Office to Support Growth',
+    excerpt: 'A new regional office will expand delivery capacity and support a growing project pipeline.',
+    content: [
+      'To support a growing project pipeline, a new regional office has been established, expanding local delivery capacity and client support.',
+      'The office will house engineering, project management and business development teams.',
+      'This expansion reflects continued investment in the company\'s long-term growth strategy.',
+    ],
+    category: 'company-news',
+    categoryLabel: categoryLabel('company-news'),
+    author: '[AUTHOR NAME]',
+    publishedDate: '2026-03-05',
+    featuredImage: unsplash(UNSPLASH.brownBrickBuilding, 1200, 700),
+  },
+];

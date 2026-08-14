@@ -1,0 +1,34 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-2;
+  font-size: $fs-sm;
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.breadcrumb__link {
+  color: $color-text-inverse-muted;
+  @include motion-safe-transition(color);
+
+  &:hover {
+    color: $color-accent-light;
+  }
+}
+
+.breadcrumb__sep {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.breadcrumb__current {
+  color: $color-white;
+  font-weight: $fw-medium;
+}

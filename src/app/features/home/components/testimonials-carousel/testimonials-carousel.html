@@ -1,0 +1,36 @@
+@if (testimonials().length) {
+  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Client testimonials">
+    <div class="carousel__viewport">
+      <div class="carousel__track" [style.transform]="'translateX(-' + activeIndex() * 100 + '%)'">
+        @for (t of testimonials(); track t.id) {
+          <div class="carousel__slide">
+            <app-testimonial-card [testimonial]="t" />
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="carousel__controls">
+      <button type="button" class="carousel__arrow" (click)="prev()" aria-label="Previous testimonial">
+        <span class="icon" aria-hidden="true">chevron_left</span>
+      </button>
+
+      <div class="carousel__dots">
+        @for (t of testimonials(); track t.id; let i = $index) {
+          <button
+            type="button"
+            class="carousel__dot"
+            [class.is-active]="i === activeIndex()"
+            (click)="goTo(i)"
+            [attr.aria-label]="'Go to testimonial ' + (i + 1)"
+            [attr.aria-current]="i === activeIndex()"
+          ></button>
+        }
+      </div>
+
+      <button type="button" class="carousel__arrow" (click)="next()" aria-label="Next testimonial">
+        <span class="icon" aria-hidden="true">chevron_right</span>
+      </button>
+    </div>
+  </div>
+}

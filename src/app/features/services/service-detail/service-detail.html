@@ -1,0 +1,83 @@
+@if (loading()) {
+  <app-loading-spinner label="Loading service…" [fullHeight]="true" />
+} @else if (notFound()) {
+  <div class="container">
+    <app-empty-state icon="search_off" title="Service Not Found" message="The service you're looking for doesn't exist or may have been moved.">
+      <a routerLink="/services" class="btn btn--primary">Back to Services</a>
+    </app-empty-state>
+  </div>
+} @else if (service(); as svc) {
+  <app-hero-section
+    [image]="svc.heroImage"
+    [title]="svc.title"
+    [subtitle]="svc.shortDescription"
+    [breadcrumbs]="[{ label: 'Services', path: '/services' }, { label: svc.title }]"
+  />
+
+  <section class="section">
+    <div class="container detail-grid">
+      <div appReveal>
+        <h2>Overview</h2>
+        <p>{{ svc.description }}</p>
+
+        <h3>Scope of Work</h3>
+        <ul class="check-list">
+          @for (item of svc.scopeOfWork; track item) {
+            <li><span class="icon icon--sm" aria-hidden="true">check_circle</span>{{ item }}</li>
+          }
+        </ul>
+
+        <h3>Our Process</h3>
+        <ol class="process-list">
+          @for (step of svc.process; track step.title; let i = $index) {
+            <li>
+              <span class="process-list__number">{{ i + 1 }}</span>
+              <div>
+                <h4>{{ step.title }}</h4>
+                <p>{{ step.description }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+
+      <aside appReveal>
+        <div class="sidebar-card">
+          <h3>Key Capabilities</h3>
+          <ul class="check-list">
+            @for (item of svc.capabilities; track item) {
+              <li><span class="icon icon--sm" aria-hidden="true">bolt</span>{{ item }}</li>
+            }
+          </ul>
+        </div>
+        <div class="sidebar-card sidebar-card--cta">
+          <h3>Ready to Start a Project?</h3>
+          <p>Get a tailored quote for your {{ svc.title | lowercase }} project.</p>
+          <a routerLink="/request-quote" class="btn btn--primary btn--block">Request a Quote</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  @if (relatedProjects().length) {
+    <section class="section section--alt">
+      <div class="container">
+        <app-section-header eyebrow="Related Work" title="Related Projects" />
+        <div class="card-grid card-grid--3">
+          @for (project of relatedProjects(); track project.id) {
+            <app-project-card [project]="project" appReveal />
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <app-cta-section
+    title="Discuss Your Project Requirements"
+    description="Our team is ready to help scope and deliver your next project."
+    [actions]="[
+      { label: 'Request a Quote', path: '/request-quote', style: 'primary' },
+      { label: 'Contact Us', path: '/contact', style: 'secondary' }
+    ]"
+  />
+}

@@ -1,0 +1,29 @@
+<div class="gallery">
+  @for (image of images(); track image; let i = $index) {
+    <button type="button" class="gallery__thumb" (click)="open(i)" [attr.aria-label]="'Open image ' + (i + 1) + ' of ' + images().length">
+      <img [src]="image" [alt]="alt() + ' ' + (i + 1)" loading="lazy" width="600" height="450" />
+      <span class="icon gallery__zoom-icon" aria-hidden="true">zoom_in</span>
+    </button>
+  }
+</div>
+
+@if (activeIndex() !== null) {
+  @let index = activeIndex()!;
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" (click)="close()">
+    <button type="button" class="lightbox__close" (click)="close()" aria-label="Close image viewer">
+      <span class="icon icon--lg" aria-hidden="true">close</span>
+    </button>
+
+    <button type="button" class="lightbox__nav lightbox__nav--prev" (click)="prev(); $event.stopPropagation()" aria-label="Previous image">
+      <span class="icon icon--lg" aria-hidden="true">chevron_left</span>
+    </button>
+
+    <img [src]="images()[index]" [alt]="alt()" class="lightbox__image" (click)="$event.stopPropagation()" />
+
+    <button type="button" class="lightbox__nav lightbox__nav--next" (click)="next(); $event.stopPropagation()" aria-label="Next image">
+      <span class="icon icon--lg" aria-hidden="true">chevron_right</span>
+    </button>
+
+    <span class="lightbox__counter">{{ index + 1 }} / {{ images().length }}</span>
+  </div>
+}

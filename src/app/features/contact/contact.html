@@ -1,0 +1,56 @@
+<app-hero-section
+  [image]="heroImage"
+  title="Contact Us"
+  subtitle="We'd love to hear about your next project. Reach out to our team."
+  [breadcrumbs]="[{ label: 'Contact' }]"
+/>
+
+<section class="section">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+      <p>Reach out using the details below, or send us a message and we'll respond as soon as possible.</p>
+
+      <ul class="contact-info__list">
+        <li>
+          <span class="icon" aria-hidden="true">location_on</span>
+          <div>
+            <span>Address</span>
+            <strong>[COMPANY ADDRESS]</strong>
+          </div>
+        </li>
+        <li>
+          <span class="icon" aria-hidden="true">call</span>
+          <div>
+            <span>Phone</span>
+            <strong>[COMPANY PHONE]</strong>
+          </div>
+        </li>
+        <li>
+          <span class="icon" aria-hidden="true">mail</span>
+          <div>
+            <span>Email</span>
+            <strong>[COMPANY EMAIL]</strong>
+          </div>
+        </li>
+        <li>
+          <span class="icon" aria-hidden="true">schedule</span>
+          <div>
+            <span>Opening Hours</span>
+            <strong>Mon &ndash; Fri: 8:00 AM &ndash; 5:00 PM</strong>
+          </div>
+        </li>
+      </ul>
+
+      <div class="map-placeholder" role="img" aria-label="Map placeholder showing company location">
+        <span class="icon icon--lg" aria-hidden="true">map</span>
+        <span>[GOOGLE MAPS EMBED PLACEHOLDER]</span>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <h2>Send a Message</h2>
+      <app-contact-form />
+    </div>
+  </div>
+</section>

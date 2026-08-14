@@ -1,0 +1,11 @@
+@use 'tokens' as *;
+
+// Layout, meta strip, progress bar and stat list now live in
+// src/styles/_utilities.scss (shared with the career-detail page).
+.project-gallery-wrap {
+  margin-top: $space-9;
+
+  h2 {
+    margin-bottom: $space-5;
+  }
+}

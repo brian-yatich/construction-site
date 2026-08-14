@@ -1,0 +1,54 @@
+<app-hero-section
+  [image]="heroImage"
+  title="Our Projects"
+  subtitle="A portfolio of building, civil engineering, road and infrastructure projects delivered across the region."
+  [breadcrumbs]="[{ label: 'Projects' }]"
+/>
+
+<section class="section">
+  <div class="container">
+    <div class="filters" role="group" aria-label="Filter projects by category">
+      <span class="filters__label">Category:</span>
+      @for (option of categoryOptions; track option.value) {
+        <button
+          type="button"
+          class="filter-pill"
+          [class.is-active]="selectedCategory() === option.value"
+          (click)="setCategory(option.value)"
+          [attr.aria-pressed]="selectedCategory() === option.value"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter projects by status">
+      <span class="filters__label">Status:</span>
+      @for (option of statusOptions; track option.value) {
+        <button
+          type="button"
+          class="filter-pill"
+          [class.is-active]="selectedStatus() === option.value"
+          (click)="setStatus(option.value)"
+          [attr.aria-pressed]="selectedStatus() === option.value"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+
+    @if (loading()) {
+      <app-loading-spinner label="Loading projects…" />
+    } @else if (hasError()) {
+      <app-error-state (retry)="load()" message="We couldn't load the project portfolio. Please try again." />
+    } @else if (filteredProjects().length === 0) {
+      <app-empty-state icon="filter_alt_off" title="No Projects Found" message="Try adjusting your filters to see more projects." />
+    } @else {
+      <div class="card-grid card-grid--3">
+        @for (project of filteredProjects(); track project.id) {
+          <app-project-card [project]="project" [showProgress]="true" appReveal />
+        }
+      </div>
+    }
+  </div>
+</section>
