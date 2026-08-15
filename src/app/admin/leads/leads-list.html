@@ -1,0 +1,59 @@
+<h1>{{ title }}</h1>
+<p class="hint">Submissions from the public site's {{ kind() === 'contact' ? 'Contact' : 'Request a Quote' }} form.</p>
+
+@if (loading()) {
+  <p class="hint">Loading…</p>
+} @else if (error()) {
+  <div class="admin-error">
+    <p>Couldn't load {{ title.toLowerCase() }}.</p>
+    <button type="button" class="btn btn--outline btn--sm" (click)="load()">Retry</button>
+  </div>
+} @else if (rows().length === 0) {
+  <p class="hint">No submissions yet.</p>
+} @else {
+  <div class="leads-list">
+    @for (row of rows(); track row.id) {
+      <div class="lead-card" [class.is-new]="row.status === 'new'">
+        <button type="button" class="lead-card__summary" (click)="toggleExpand(row.id)">
+          <div>
+            <strong>{{ row.name || row.fullName }}</strong>
+            <span class="lead-card__meta">{{ row.email }} &middot; {{ row.createdAt | date: 'medium' }}</span>
+          </div>
+          <span class="status-pill" [class]="'status-pill--' + row.status">{{ row.status }}</span>
+        </button>
+
+        @if (expandedId() === row.id) {
+          <div class="lead-card__details">
+            @if (kind() === 'contact') {
+              <p><strong>Phone:</strong> {{ row.phone }}</p>
+              <p><strong>Company:</strong> {{ row.company || '—' }}</p>
+              <p><strong>Subject:</strong> {{ row.subject }}</p>
+              <p><strong>Message:</strong></p>
+              <p class="lead-card__message">{{ row.message }}</p>
+            } @else {
+              <p><strong>Reference:</strong> {{ row.referenceId }}</p>
+              <p><strong>Phone:</strong> {{ row.phone }}</p>
+              <p><strong>Company:</strong> {{ row.company || '—' }}</p>
+              <p><strong>Project Type:</strong> {{ row.projectType }}</p>
+              <p><strong>Location:</strong> {{ row.projectLocation }}</p>
+              <p><strong>Budget:</strong> {{ row.estimatedBudget || '—' }}</p>
+              <p><strong>Expected Start:</strong> {{ row.expectedStartDate | date: 'mediumDate' }}</p>
+              <p><strong>Description:</strong></p>
+              <p class="lead-card__message">{{ row.projectDescription }}</p>
+            }
+
+            <div class="lead-card__actions">
+              <label class="form-label" [for]="'status-' + row.id">Status</label>
+              <select [id]="'status-' + row.id" class="form-control" [value]="row.status" (change)="updateStatus(row, $any($event.target).value)">
+                @for (opt of statusOptions; track opt) {
+                  <option [value]="opt">{{ opt }}</option>
+                }
+              </select>
+              <button type="button" class="btn btn--outline btn--sm btn--danger" (click)="remove(row)">Delete</button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+}

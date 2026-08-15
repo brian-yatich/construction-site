@@ -18,6 +18,7 @@ import {
 } from '../../shared/components';
 import { Reveal } from '../../shared/directives/reveal.directive';
 import { TestimonialsCarousel } from './components/testimonials-carousel/testimonials-carousel';
+import { OngoingProjectsCarousel } from './components/ongoing-projects-carousel/ongoing-projects-carousel';
 import { unsplash, UNSPLASH } from '../../core/mock/unsplash';
 
 @Component({
@@ -31,6 +32,7 @@ import { unsplash, UNSPLASH } from '../../core/mock/unsplash';
     StatisticCard,
     CtaSection,
     TestimonialsCarousel,
+    OngoingProjectsCarousel,
     Reveal,
   ],
   templateUrl: './home.html',

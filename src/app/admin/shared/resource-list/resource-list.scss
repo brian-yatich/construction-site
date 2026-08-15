@@ -1,0 +1,76 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-6;
+
+  h1 {
+    font-size: $fs-xl;
+    margin: 0;
+  }
+}
+
+.hint {
+  color: $color-text-muted;
+}
+
+.admin-error {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  color: $color-error;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  @include card-surface;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $fs-sm;
+
+  th,
+  td {
+    text-align: left;
+    padding: $space-3 $space-4;
+    border-bottom: $border-width solid $color-border;
+    white-space: nowrap;
+    max-width: 320px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  th {
+    background: $color-bg-alt;
+    color: $color-text-muted;
+    font-weight: $fw-semibold;
+    text-transform: uppercase;
+    font-size: $fs-xs;
+    letter-spacing: 0.03em;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.actions-col {
+  display: flex;
+  gap: $space-2;
+  white-space: nowrap;
+}
+
+.btn--danger {
+  color: $color-error;
+  border-color: $color-error;
+
+  &:hover:not(:disabled) {
+    background: $color-error;
+    color: $color-white;
+  }
+}

@@ -1,0 +1,51 @@
+<div class="list-header">
+  <h1>{{ config().title }}</h1>
+  <a [routerLink]="['new']" class="btn btn--primary btn--sm">
+    <span class="icon icon--sm" aria-hidden="true">add</span>
+    New
+  </a>
+</div>
+
+@if (loading()) {
+  <p class="hint">Loading…</p>
+} @else if (error()) {
+  <div class="admin-error">
+    <p>Couldn't load {{ config().title.toLowerCase() }}.</p>
+    <button type="button" class="btn btn--outline btn--sm" (click)="load()">Retry</button>
+  </div>
+} @else if (rows().length === 0) {
+  <p class="hint">No {{ config().title.toLowerCase() }} yet. Click "New" to add one.</p>
+} @else {
+  <div class="table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          @for (col of config().listColumns; track col.key) {
+            <th>{{ col.label }}</th>
+          }
+          <th class="actions-col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows(); track row['id']) {
+          <tr>
+            @for (col of config().listColumns; track col.key) {
+              <td>{{ row[col.key] }}</td>
+            }
+            <td class="actions-col">
+              <a [routerLink]="[row['id'], 'edit']" class="btn btn--outline btn--sm">Edit</a>
+              <button
+                type="button"
+                class="btn btn--outline btn--sm btn--danger"
+                (click)="confirmDelete(row)"
+                [disabled]="deletingId() === row['id']"
+              >
+                {{ deletingId() === row['id'] ? 'Deleting…' : 'Delete' }}
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

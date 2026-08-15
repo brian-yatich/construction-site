@@ -1,0 +1,39 @@
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar__brand">
+      <span class="icon" aria-hidden="true">foundation</span>
+      <span>[COMPANY NAME]</span>
+    </div>
+
+    <nav class="admin-nav">
+      @for (group of navGroups; track group.label) {
+        <div class="admin-nav__group">
+          <span class="admin-nav__label">{{ group.label }}</span>
+          @for (link of group.links; track link.path) {
+            <a [routerLink]="link.path" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: link.path === '/admin' }">
+              <span class="icon icon--sm" aria-hidden="true">{{ link.icon }}</span>
+              {{ link.label }}
+            </a>
+          }
+        </div>
+      }
+    </nav>
+  </aside>
+
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <a routerLink="/" class="admin-topbar__view-site">
+        <span class="icon icon--sm" aria-hidden="true">open_in_new</span>
+        View Site
+      </a>
+      <div class="admin-topbar__user">
+        <span>{{ auth.admin()?.name }}</span>
+        <button type="button" class="btn btn--outline btn--sm" (click)="logout()">Sign Out</button>
+      </div>
+    </header>
+
+    <main class="admin-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

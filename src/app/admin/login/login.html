@@ -1,0 +1,34 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-card__logo">
+      <span class="icon icon--lg" aria-hidden="true">foundation</span>
+      <span>[COMPANY NAME] Admin</span>
+    </div>
+
+    <h1>Sign In</h1>
+    <p class="hint">Enter your admin credentials to manage site content.</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      @if (errorMessage()) {
+        <div class="form-feedback form-feedback--error" role="alert">
+          <span class="icon" aria-hidden="true">error</span>
+          <span>{{ errorMessage() }}</span>
+        </div>
+      }
+
+      <div class="form-field">
+        <label class="form-label" for="login-email">Email</label>
+        <input id="login-email" type="email" class="form-control" formControlName="email" autocomplete="username" />
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="login-password">Password</label>
+        <input id="login-password" type="password" class="form-control" formControlName="password" autocomplete="current-password" />
+      </div>
+
+      <button type="submit" class="btn btn--primary btn--block" [disabled]="submitting()">
+        {{ submitting() ? 'Signing in…' : 'Sign In' }}
+      </button>
+    </form>
+  </div>
+</div>

@@ -72,26 +72,28 @@ body.no-scroll {
 }
 
 // ---- Reusable card grids ----------------------------------------------------
+// Flexbox, not CSS Grid: with `repeat(N, 1fr)` a short/filtered last row
+// leaves visibly empty grid cells (grid columns are fixed for the whole
+// container, not recalculated per row). Flex-wrap has no such concept —
+// leftover items on the final line simply grow to fill it, so there's
+// never a dangling empty slot no matter how many items there are.
 .card-grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: $space-6;
-  grid-template-columns: 1fr;
 
-  @include respond(sm) {
-    grid-template-columns: repeat(2, 1fr);
+  > * {
+    flex: 1 1 260px;
+    min-width: 0;
   }
 }
 
-.card-grid--3 {
-  @include respond(lg) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.card-grid--3 > * {
+  flex-basis: 320px;
 }
 
-.card-grid--4 {
-  @include respond(lg) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.card-grid--4 > * {
+  flex-basis: 260px;
 }
 
 .section-footer-action {

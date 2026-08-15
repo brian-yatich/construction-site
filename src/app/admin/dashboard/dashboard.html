@@ -1,0 +1,23 @@
+<h1>Dashboard</h1>
+<p class="hint">Overview of your site content and incoming leads.</p>
+
+@if (loading()) {
+  <p class="hint">Loading…</p>
+} @else {
+  @if (newLeadsCount() > 0) {
+    <div class="alert-banner">
+      <span class="icon" aria-hidden="true">notifications_active</span>
+      You have {{ newLeadsCount() }} new lead{{ newLeadsCount() === 1 ? '' : 's' }} to review.
+    </div>
+  }
+
+  <div class="dashboard-grid">
+    @for (card of cards(); track card.label) {
+      <a [routerLink]="card.path" class="dashboard-card">
+        <span class="icon icon--lg" aria-hidden="true">{{ card.icon }}</span>
+        <span class="dashboard-card__count">{{ card.count }}</span>
+        <span class="dashboard-card__label">{{ card.label }}</span>
+      </a>
+    }
+  </div>
+}

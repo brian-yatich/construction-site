@@ -1,0 +1,118 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+  background: $color-bg-alt;
+}
+
+.admin-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: $color-primary;
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  padding: $space-6 0;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.admin-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-heading;
+  font-weight: $fw-semibold;
+  padding: 0 $space-6 $space-6;
+  border-bottom: $border-width solid rgba(255, 255, 255, 0.12);
+  margin-bottom: $space-5;
+
+  .icon {
+    color: $color-accent;
+  }
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+  overflow-y: auto;
+}
+
+.admin-nav__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-nav__label {
+  padding: 0 $space-6;
+  font-size: $fs-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: $space-2;
+}
+
+.admin-nav a {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-6;
+  font-size: $fs-sm;
+  color: rgba(255, 255, 255, 0.75);
+  @include motion-safe-transition(all, $transition-fast);
+
+  &:hover {
+    color: $color-white;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  &.is-active {
+    color: $color-white;
+    background: rgba(255, 255, 255, 0.1);
+    border-right: 3px solid $color-accent;
+  }
+}
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-4 $space-6;
+  background: $color-white;
+  border-bottom: $border-width solid $color-border;
+}
+
+.admin-topbar__view-site {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $fs-sm;
+  color: $color-secondary;
+}
+
+.admin-topbar__user {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  font-size: $fs-sm;
+  color: $color-text-muted;
+}
+
+.admin-content {
+  flex: 1;
+  padding: $space-7 $space-6;
+  max-width: 1200px;
+  width: 100%;
+}

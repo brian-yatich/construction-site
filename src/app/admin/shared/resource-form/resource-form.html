@@ -1,0 +1,112 @@
+<div class="form-header">
+  <a [routerLink]="['/admin', config().routeSegment]" class="link back-link">
+    <span class="icon icon--sm" aria-hidden="true">arrow_back</span>
+    Back to {{ config().title }}
+  </a>
+  <h1>{{ isEdit() ? 'Edit' : 'New' }} {{ config().title.slice(0, -1) || config().title }}</h1>
+</div>
+
+@if (loading()) {
+  <p class="hint">Loading…</p>
+} @else {
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="admin-form">
+    @if (errorMessage()) {
+      <div class="form-feedback form-feedback--error" role="alert">
+        <span class="icon" aria-hidden="true">error</span>
+        <span>{{ errorMessage() }}</span>
+      </div>
+    }
+
+    @for (field of config().fields; track field.key) {
+      <div class="form-field" [class.form-field--checkbox]="field.type === 'boolean'">
+        @if (field.type !== 'boolean') {
+          <label class="form-label" [for]="field.key">
+            {{ field.label }}
+            @if (field.required) { <span class="required">*</span> }
+          </label>
+        }
+
+        @switch (field.type) {
+          @case ('textarea') {
+            <textarea [id]="field.key" class="form-control" [formControlName]="field.key" rows="4"></textarea>
+          }
+          @case ('number') {
+            <input [id]="field.key" type="number" class="form-control" [formControlName]="field.key" />
+          }
+          @case ('date') {
+            <input [id]="field.key" type="date" class="form-control" [formControlName]="field.key" />
+          }
+          @case ('boolean') {
+            <label class="checkbox-label">
+              <input type="checkbox" [formControlName]="field.key" />
+              {{ field.label }}
+            </label>
+          }
+          @case ('select') {
+            <select [id]="field.key" class="form-control" [formControlName]="field.key">
+              <option value="" disabled>Select…</option>
+              @for (opt of field.options; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+          }
+          @case ('string-array') {
+            <div class="array-editor" [formArrayName]="field.key">
+              @for (ctrl of getArray(field.key).controls; track $index) {
+                <div class="array-editor__row">
+                  <input type="text" class="form-control" [formControlName]="$index" />
+                  <button type="button" class="icon-btn" (click)="removeStringItem(field.key, $index)" aria-label="Remove item">
+                    <span class="icon icon--sm" aria-hidden="true">close</span>
+                  </button>
+                </div>
+              }
+              <button type="button" class="btn btn--outline btn--sm" (click)="addStringItem(field.key)">
+                <span class="icon icon--sm" aria-hidden="true">add</span>
+                Add {{ field.label }}
+              </button>
+            </div>
+          }
+          @case ('object-array') {
+            <div class="array-editor" [formArrayName]="field.key">
+              @for (group of getArray(field.key).controls; track $index) {
+                <div class="array-editor__group" [formGroupName]="$index">
+                  @for (itemField of field.itemFields; track itemField.key) {
+                    <div class="form-field">
+                      <label class="form-label">{{ itemField.label }}</label>
+                      @if (itemField.type === 'textarea') {
+                        <textarea class="form-control" [formControlName]="itemField.key" rows="2"></textarea>
+                      } @else {
+                        <input type="text" class="form-control" [formControlName]="itemField.key" />
+                      }
+                    </div>
+                  }
+                  <button type="button" class="btn btn--outline btn--sm btn--danger" (click)="removeObjectItem(field.key, $index)">
+                    Remove
+                  </button>
+                </div>
+              }
+              <button type="button" class="btn btn--outline btn--sm" (click)="addObjectItem(field)">
+                <span class="icon icon--sm" aria-hidden="true">add</span>
+                Add {{ field.label }}
+              </button>
+            </div>
+          }
+          @default {
+            <input [id]="field.key" type="text" class="form-control" [formControlName]="field.key" />
+          }
+        }
+
+        @if (field.hint) {
+          <span class="form-hint">{{ field.hint }}</span>
+        }
+      </div>
+    }
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn--primary" [disabled]="saving()">
+        {{ saving() ? 'Saving…' : isEdit() ? 'Save Changes' : 'Create' }}
+      </button>
+      <a [routerLink]="['/admin', config().routeSegment]" class="btn btn--outline">Cancel</a>
+    </div>
+  </form>
+}

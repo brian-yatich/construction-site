@@ -1,4 +1,4 @@
-<app-hero-section [image]="heroImage" size="full" [showScrollHint]="true"
+<app-hero-section [image]="heroImage" size="full"
   title="Building Today. Engineering Tomorrow."
   subtitle="We deliver reliable construction, civil engineering and infrastructure solutions through quality workmanship, innovative engineering and professional project management.">
   <a routerLink="/request-quote" class="btn btn--primary">Request a Quote</a>
@@ -94,11 +94,7 @@
     <div class="container">
       <app-section-header eyebrow="In Progress" title="Ongoing Projects"
         description="Active projects currently under construction across our portfolio." />
-      <div class="card-grid card-grid--3">
-        @for (project of ongoingProjects(); track project.id) {
-          <app-project-card [project]="project" [showProgress]="true" appReveal />
-        }
-      </div>
+      <app-ongoing-projects-carousel [projects]="ongoingProjects()" />
     </div>
   </section>
 }

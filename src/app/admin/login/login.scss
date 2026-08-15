@@ -1,0 +1,45 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $color-primary 0%, $color-charcoal 100%);
+  padding: $space-5;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: $color-white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  padding: $space-8;
+}
+
+.login-card__logo {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-heading;
+  font-weight: $fw-semibold;
+  color: $color-primary;
+  margin-bottom: $space-6;
+
+  .icon {
+    color: $color-accent;
+  }
+}
+
+h1 {
+  font-size: $fs-xl;
+  margin-bottom: $space-2;
+}
+
+.hint {
+  color: $color-text-muted;
+  font-size: $fs-sm;
+  margin-bottom: $space-6;
+}

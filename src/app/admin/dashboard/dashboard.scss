@@ -1,0 +1,57 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+h1 {
+  font-size: $fs-xl;
+  margin-bottom: $space-2;
+}
+
+.hint {
+  color: $color-text-muted;
+  margin-bottom: $space-6;
+}
+
+.alert-banner {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-4 $space-5;
+  background: rgba(200, 145, 47, 0.12);
+  color: $color-accent-dark;
+  border-radius: $radius-md;
+  margin-bottom: $space-6;
+  font-weight: $fw-medium;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: $space-5;
+}
+
+.dashboard-card {
+  @include card-surface;
+  @include card-hover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-6;
+  text-align: center;
+
+  .icon {
+    color: $color-accent;
+  }
+}
+
+.dashboard-card__count {
+  font-family: $font-heading;
+  font-weight: $fw-bold;
+  font-size: $fs-3xl;
+  color: $color-primary;
+}
+
+.dashboard-card__label {
+  font-size: $fs-sm;
+  color: $color-text-muted;
+}

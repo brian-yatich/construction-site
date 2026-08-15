@@ -1,0 +1,51 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.carousel__track {
+  display: flex;
+  gap: $space-5;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: $space-2;
+
+  // Scrollable by drag/swipe/trackpad; arrow buttons below drive it too,
+  // so the native scrollbar is just visual clutter.
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.carousel__item {
+  flex: 0 0 auto;
+  width: min(340px, 85vw);
+  scroll-snap-align: start;
+}
+
+.carousel__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: $space-3;
+  margin-top: $space-5;
+}
+
+.carousel__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: $border-width solid $color-border;
+  color: $color-primary;
+  @include motion-safe-transition(all);
+
+  &:hover {
+    background: $color-primary;
+    border-color: $color-primary;
+    color: $color-white;
+  }
+}

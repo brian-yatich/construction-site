@@ -1,0 +1,113 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+h1 {
+  font-size: $fs-xl;
+  margin-bottom: $space-2;
+}
+
+.hint {
+  color: $color-text-muted;
+  margin-bottom: $space-6;
+}
+
+.admin-error {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  color: $color-error;
+}
+
+.leads-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.lead-card {
+  @include card-surface;
+  overflow: hidden;
+}
+
+.lead-card.is-new {
+  border-left: 3px solid $color-accent;
+}
+
+.lead-card__summary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-4;
+  padding: $space-4 $space-5;
+  text-align: left;
+
+  strong {
+    display: block;
+    color: $color-primary;
+  }
+}
+
+.lead-card__meta {
+  display: block;
+  font-size: $fs-xs;
+  color: $color-text-muted;
+  margin-top: $space-1;
+}
+
+.status-pill {
+  flex-shrink: 0;
+  padding: $space-1 $space-3;
+  border-radius: $radius-pill;
+  font-size: $fs-xs;
+  font-weight: $fw-semibold;
+  text-transform: uppercase;
+  background: $color-grey-300;
+  color: $color-text;
+}
+
+.status-pill--new {
+  background: $color-accent;
+  color: $color-charcoal;
+}
+
+.status-pill--read {
+  background: $color-secondary-light;
+  color: $color-white;
+}
+
+.status-pill--archived {
+  background: $color-grey-500;
+  color: $color-white;
+}
+
+.lead-card__details {
+  padding: 0 $space-5 $space-5;
+  border-top: $border-width solid $color-border;
+  padding-top: $space-4;
+
+  p {
+    margin-bottom: $space-2;
+    font-size: $fs-sm;
+  }
+}
+
+.lead-card__message {
+  white-space: pre-wrap;
+  color: $color-text;
+}
+
+.lead-card__actions {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-top: $space-4;
+
+  .form-label {
+    margin: 0;
+  }
+
+  select {
+    width: auto;
+  }
+}
