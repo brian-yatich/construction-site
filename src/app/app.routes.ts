@@ -121,14 +121,19 @@ export const routes: Routes = [
     loadComponent: () => import('./features/quotation/quotation').then((m) => m.Quotation),
   },
   {
-    path: 'privacy-policy',
+    path: 'terms-of-use',
     loadComponent: () => import('./features/legal/legal-page').then((m) => m.LegalPage),
-    data: { title: 'Privacy Policy' },
+    data: { title: 'Terms of Use' },
   },
   {
-    path: 'terms-conditions',
+    path: 'privacy-notice',
     loadComponent: () => import('./features/legal/legal-page').then((m) => m.LegalPage),
-    data: { title: 'Terms & Conditions' },
+    data: { title: 'Privacy Notice' },
+  },
+  {
+    path: 'disclaimer',
+    loadComponent: () => import('./features/legal/legal-page').then((m) => m.LegalPage),
+    data: { title: 'Disclaimer' },
   },
   {
     path: '404',

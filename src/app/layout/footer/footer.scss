@@ -17,34 +17,25 @@
   }
 
   @include respond(lg) {
-    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    grid-template-columns: 0.6fr 1fr 1fr 1.2fr;
     gap: $space-6;
   }
 }
 
-.site-footer__logo {
+.site-footer__col--brand {
+  @include respond(lg) {
+    padding-top: $space-1;
+  }
+}
+
+// Nested under `.site-footer__col` so this selector has enough specificity
+// to beat `.site-footer__col ul { flex-direction: column }` below — with
+// Angular's view-encapsulation attribute added to every simple selector,
+// a bare `.site-footer__social` alone doesn't out-specificity it.
+.site-footer__col .site-footer__social {
   display: flex;
-  align-items: center;
-  gap: $space-2;
-  font-family: $font-heading;
-  font-weight: $fw-semibold;
-  font-size: $fs-lg;
-  color: $color-white;
-  margin-bottom: $space-4;
-}
-
-.site-footer__logo-icon {
-  color: $color-accent;
-}
-
-.site-footer__description {
-  max-width: 34ch;
-  margin-bottom: $space-5;
-  font-size: $fs-sm;
-}
-
-.site-footer__social {
-  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: $space-3;
 
   a {
