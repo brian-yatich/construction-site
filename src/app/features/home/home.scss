@@ -2,12 +2,33 @@
 @use 'mixins' as *;
 
 // ---- Statistics band ---------------------------------------------------------
+// Frosted-glass tiles (see `statistic-card`) over a gradient with soft
+// blurred color blobs, echoing the glassmorphism used on the admin dashboard.
 .stats-band {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   background: linear-gradient(120deg, $color-primary 0%, $color-primary-600 100%);
   padding-block: $space-8;
 }
 
+.stats-band__glow {
+  @include glass-glow($color-accent, 360px);
+  top: -160px;
+  left: -80px;
+
+  &--b {
+    @include glass-glow($color-secondary-light, 320px);
+    top: auto;
+    left: auto;
+    bottom: -180px;
+    right: -60px;
+  }
+}
+
 .stats-band__grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: $space-4;

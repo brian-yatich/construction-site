@@ -23,25 +23,59 @@ h1 {
   font-weight: $fw-medium;
 }
 
+// ---- KPI cards --------------------------------------------------------------------
+// Each card picks up an accent color, cycled across the palette, used for its
+// top border and icon tint.
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: $space-5;
+  margin-bottom: $space-7;
 }
 
 .dashboard-card {
   @include card-surface;
   @include card-hover;
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: $space-2;
-  padding: $space-6;
-  text-align: center;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-5;
+  overflow: hidden;
 
-  .icon {
-    color: $color-accent;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: var(--kpi-color, #{$color-accent});
   }
+
+  &:nth-child(4n + 1) {
+    --kpi-color: #{$color-primary};
+  }
+  &:nth-child(4n + 2) {
+    --kpi-color: #{$color-accent};
+  }
+  &:nth-child(4n + 3) {
+    --kpi-color: #{$color-secondary};
+  }
+  &:nth-child(4n + 4) {
+    --kpi-color: #{$color-success};
+  }
+}
+
+.dashboard-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-md;
+  background: $color-bg-alt;
+  background: color-mix(in srgb, var(--kpi-color, #{$color-accent}) 14%, white);
+  color: var(--kpi-color, #{$color-accent});
 }
 
 .dashboard-card__count {
@@ -54,4 +88,55 @@ h1 {
 .dashboard-card__label {
   font-size: $fs-sm;
   color: $color-text-muted;
+}
+
+// ---- Chart panels -------------------------------------------------------------------
+.charts-grid {
+  display: grid;
+  gap: $space-5;
+  grid-template-columns: 1fr;
+
+  @include respond(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.chart-panel {
+  @include card-surface;
+  padding: $space-6;
+}
+
+.chart-panel--wide {
+  @include respond(md) {
+    grid-column: span 2;
+  }
+}
+
+.chart-panel__header {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding-bottom: $space-4;
+  margin-bottom: $space-5;
+  border-bottom: $border-width solid $color-border;
+
+  h2 {
+    font-family: $font-heading;
+    font-weight: $fw-semibold;
+    font-size: $fs-md;
+    color: $color-primary;
+    margin: 0;
+  }
+}
+
+.chart-panel__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: $radius-sm;
+  background: rgba(200, 145, 47, 0.12);
+  color: $color-accent-dark;
 }

@@ -119,3 +119,51 @@ $breakpoints: (
     }
   }
 }
+
+// ---- Glassmorphism --------------------------------------------------------------
+// Frosted-glass surface for content sitting on a gradient or photo background.
+// `dark` (default) is white-tinted glass for use over the navy brand gradient;
+// `light` is for glass over light photography/backgrounds.
+@mixin glass-panel($tone: dark) {
+  position: relative;
+  border-radius: $radius-lg;
+  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+
+  @if $tone == dark {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: $border-width solid $glass-border-dark;
+    box-shadow: $glass-shadow-dark, inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    color: $color-white;
+  } @else {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.42) 100%);
+    border: $border-width solid $glass-border-light;
+    box-shadow: $shadow-md, inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    color: $color-text;
+  }
+
+  // Fallback for browsers without backdrop-filter support: a solid tinted panel
+  // instead of a see-through one still reads as a distinct "card".
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    @if $tone == dark {
+      background: rgba(20, 44, 70, 0.85);
+    } @else {
+      background: rgba(255, 255, 255, 0.94);
+    }
+  }
+}
+
+// Soft blurred color blob used behind glass panels to give the frosted
+// effect something colorful to diffuse. Position the host `relative` with
+// `overflow: hidden` (or `isolation: isolate`) and place this on an
+// absolutely-positioned pseudo-element or decorative span.
+@mixin glass-glow($color, $size: 320px) {
+  position: absolute;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba($color, 0.5), transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+}

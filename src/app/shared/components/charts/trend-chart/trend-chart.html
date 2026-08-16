@@ -1,0 +1,35 @@
+@if (points().length > 1) {
+  <svg
+    viewBox="0 0 300 100"
+    preserveAspectRatio="none"
+    class="trend-chart__svg"
+    role="img"
+    [attr.aria-label]="'Trend of ' + total() + ' items over ' + points().length + ' days'"
+  >
+    <defs>
+      <linearGradient [attr.id]="gradientId" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e0b25f" stop-opacity="0.45" />
+        <stop offset="100%" stop-color="#e0b25f" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    <path class="trend-chart__area" [attr.d]="areaPath()" [attr.fill]="'url(#' + gradientId + ')'" [class.is-visible]="drawn()" />
+    <path
+      #lineEl
+      class="trend-chart__line"
+      [attr.d]="linePath()"
+      [style.stroke-dasharray.px]="dashLength()"
+      [style.stroke-dashoffset.px]="drawn() ? 0 : dashLength()"
+    />
+    @for (c of coords(); track c.label) {
+      <circle class="trend-chart__point" [class.is-visible]="drawn()" [attr.cx]="c.x" [attr.cy]="c.y" r="2.2">
+        <title>{{ c.label }}: {{ c.value }}</title>
+      </circle>
+    }
+  </svg>
+  <div class="trend-chart__axis">
+    <span>{{ points()[0].label }}</span>
+    <span>{{ points()[points().length - 1].label }}</span>
+  </div>
+} @else {
+  <p class="trend-chart__empty">Not enough data yet.</p>
+}

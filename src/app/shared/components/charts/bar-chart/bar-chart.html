@@ -1,0 +1,19 @@
+@if (data().length) {
+  <div class="bar-chart__bars">
+    @for (item of data(); track item.label; let i = $index) {
+      <div class="bar-chart__col">
+        <span class="bar-chart__value">{{ item.value }}</span>
+        <div class="bar-chart__track">
+          <div
+            class="bar-chart__fill"
+            [style.height.%]="barHeight(item.value)"
+            [style.transition-delay.ms]="i * 70"
+          ></div>
+        </div>
+        <span class="bar-chart__label">{{ item.label }}</span>
+      </div>
+    }
+  </div>
+} @else {
+  <p class="bar-chart__empty">No data yet.</p>
+}

@@ -27,8 +27,11 @@
         View Site
       </a>
       <div class="admin-topbar__user">
-        <span>{{ auth.admin()?.name }}</span>
-        <button type="button" class="btn btn--outline btn--sm" (click)="logout()">Sign Out</button>
+        <span class="admin-topbar__avatar" aria-hidden="true">{{ initials() }}</span>
+        <span class="admin-topbar__name">{{ auth.admin()?.name }}</span>
+        <button type="button" class="admin-topbar__signout" (click)="logout()" aria-label="Sign out" title="Sign out">
+          <span class="icon icon--sm" aria-hidden="true">logout</span>
+        </button>
       </div>
     </header>
 

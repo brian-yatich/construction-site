@@ -147,9 +147,22 @@
 
 .site-footer__legal {
   display: flex;
+  align-items: center;
   gap: $space-5;
 
   a:hover {
     color: $color-accent-light;
+  }
+}
+
+.site-footer__admin-link {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.45);
+
+  .icon {
+    font-size: 15px;
   }
 }

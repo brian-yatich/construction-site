@@ -7,14 +7,16 @@
   background: $color-bg-alt;
 }
 
+// ---- Sidebar --------------------------------------------------------------------
 .admin-sidebar {
   width: 260px;
   flex-shrink: 0;
-  background: $color-primary;
-  color: $color-white;
+  background: $color-white;
+  color: $color-text;
+  border-right: $border-width solid $color-border;
   display: flex;
   flex-direction: column;
-  padding: $space-6 0;
+  padding: $space-5 0;
 
   @media (max-width: 900px) {
     display: none;
@@ -24,15 +26,24 @@
 .admin-sidebar__brand {
   display: flex;
   align-items: center;
-  gap: $space-2;
+  gap: $space-3;
   font-family: $font-heading;
   font-weight: $fw-semibold;
-  padding: 0 $space-6 $space-6;
-  border-bottom: $border-width solid rgba(255, 255, 255, 0.12);
+  color: $color-primary;
+  padding: 0 $space-6 $space-5;
+  border-bottom: $border-width solid $color-border;
   margin-bottom: $space-5;
 
   .icon {
-    color: $color-accent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: $radius-sm;
+    background: rgba(200, 145, 47, 0.12);
+    color: $color-accent-dark;
+    font-size: 20px;
   }
 }
 
@@ -51,9 +62,10 @@
 .admin-nav__label {
   padding: 0 $space-6;
   font-size: $fs-xs;
+  font-weight: $fw-semibold;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.06em;
+  color: $color-grey-500;
   margin-bottom: $space-2;
 }
 
@@ -62,22 +74,39 @@
   align-items: center;
   gap: $space-3;
   padding: $space-2 $space-6;
+  border-left: 3px solid transparent;
   font-size: $fs-sm;
-  color: rgba(255, 255, 255, 0.75);
+  font-weight: $fw-medium;
+  color: $color-text-muted;
   @include motion-safe-transition(all, $transition-fast);
 
+  .icon {
+    color: $color-grey-500;
+    @include motion-safe-transition(color, $transition-fast);
+  }
+
   &:hover {
-    color: $color-white;
-    background: rgba(255, 255, 255, 0.06);
+    color: $color-primary;
+    background: $color-bg-alt;
+
+    .icon {
+      color: $color-accent-dark;
+    }
   }
 
   &.is-active {
-    color: $color-white;
-    background: rgba(255, 255, 255, 0.1);
-    border-right: 3px solid $color-accent;
+    color: $color-primary;
+    font-weight: $fw-semibold;
+    background: rgba(200, 145, 47, 0.08);
+    border-left-color: $color-accent;
+
+    .icon {
+      color: $color-accent-dark;
+    }
   }
 }
 
+// ---- Main column ----------------------------------------------------------------
 .admin-main {
   flex: 1;
   min-width: 0;
@@ -99,15 +128,60 @@
   align-items: center;
   gap: $space-2;
   font-size: $fs-sm;
+  font-weight: $fw-medium;
   color: $color-secondary;
+
+  &:hover {
+    color: $color-primary;
+  }
 }
 
 .admin-topbar__user {
   display: flex;
   align-items: center;
-  gap: $space-4;
+  gap: $space-3;
   font-size: $fs-sm;
+  color: $color-text;
+}
+
+.admin-topbar__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: $color-primary;
+  color: $color-white;
+  font-size: $fs-xs;
+  font-weight: $fw-semibold;
+  letter-spacing: 0.02em;
+}
+
+.admin-topbar__name {
+  font-weight: $fw-medium;
+
+  @media (max-width: 560px) {
+    display: none;
+  }
+}
+
+.admin-topbar__signout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
   color: $color-text-muted;
+  border: $border-width solid $color-border;
+  @include motion-safe-transition(all, $transition-fast);
+
+  &:hover {
+    color: $color-error;
+    border-color: $color-error;
+    background: rgba(179, 38, 30, 0.06);
+  }
 }
 
 .admin-content {

@@ -1,0 +1,35 @@
+@if (total() > 0) {
+  <div class="donut-chart__body">
+    <svg viewBox="0 0 100 100" class="donut-chart__svg" role="img" [attr.aria-label]="'Breakdown of ' + total() + ' items'">
+      <circle class="donut-chart__track" cx="50" cy="50" r="42" />
+      @for (seg of segments(); track seg.label) {
+        <circle
+          class="donut-chart__segment"
+          cx="50"
+          cy="50"
+          r="42"
+          [attr.stroke]="seg.color"
+          [attr.stroke-dasharray]="seg.dashArray"
+          [attr.stroke-dashoffset]="seg.dashOffset"
+        >
+          <title>{{ seg.label }}: {{ seg.value }} ({{ seg.percent }}%)</title>
+        </circle>
+      }
+    </svg>
+    <div class="donut-chart__total">
+      <span class="donut-chart__total-value">{{ total() }}</span>
+      <span class="donut-chart__total-label">Total</span>
+    </div>
+  </div>
+  <ul class="donut-chart__legend">
+    @for (seg of segments(); track seg.label) {
+      <li>
+        <span class="donut-chart__swatch" [style.background]="seg.color"></span>
+        {{ seg.label }}
+        <strong>{{ seg.value }}</strong>
+      </li>
+    }
+  </ul>
+} @else {
+  <p class="donut-chart__empty">No data yet.</p>
+}

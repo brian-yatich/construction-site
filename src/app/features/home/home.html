@@ -7,6 +7,8 @@
 
 <!-- Company Statistics -->
 <section class="section stats-band">
+  <span class="stats-band__glow" aria-hidden="true"></span>
+  <span class="stats-band__glow stats-band__glow--b" aria-hidden="true"></span>
   <div class="container stats-band__grid">
     @for (stat of stats(); track stat.id) {
       <app-statistic-card [stat]="stat" />

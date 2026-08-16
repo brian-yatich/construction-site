@@ -1,0 +1,69 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.trend-chart__svg {
+  width: 100%;
+  height: 140px;
+  overflow: visible;
+}
+
+.trend-chart__area {
+  opacity: 0;
+  transition: opacity 900ms ease 300ms;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  @include reduced-motion {
+    transition: none;
+  }
+}
+
+.trend-chart__line {
+  fill: none;
+  stroke: $color-accent-dark;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dashoffset 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  @include reduced-motion {
+    transition: none;
+  }
+}
+
+.trend-chart__point {
+  fill: $color-white;
+  stroke: $color-accent-dark;
+  stroke-width: 2;
+  opacity: 0;
+  transition: opacity 400ms ease 900ms;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  @include reduced-motion {
+    transition: none;
+  }
+}
+
+.trend-chart__axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: $space-2;
+  font-size: $fs-xs;
+  color: $color-text-muted;
+}
+
+.trend-chart__empty {
+  color: $color-text-muted;
+  font-size: $fs-sm;
+  text-align: center;
+  padding: $space-8 0;
+}

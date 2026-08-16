@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AdminAuthService } from '../core/admin-auth.service';
 
@@ -51,6 +51,16 @@ const NAV_GROUPS: NavGroup[] = [
 export class Layout {
   readonly navGroups = NAV_GROUPS;
   readonly auth = inject(AdminAuthService);
+
+  readonly initials = computed(() => {
+    const name = this.auth.admin()?.name ?? '';
+    const letters = name
+      .split(' ')
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((word) => word[0]?.toUpperCase());
+    return letters.join('') || 'A';
+  });
 
   logout(): void {
     this.auth.logout();

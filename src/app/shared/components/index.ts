@@ -13,3 +13,6 @@ export * from './team-card/team-card';
 export * from './testimonial-card/testimonial-card';
 export * from './blog-card/blog-card';
 export * from './job-card/job-card';
+export * from './charts/bar-chart/bar-chart';
+export * from './charts/donut-chart/donut-chart';
+export * from './charts/trend-chart/trend-chart';

@@ -14,10 +14,44 @@
   <div class="dashboard-grid">
     @for (card of cards(); track card.label) {
       <a [routerLink]="card.path" class="dashboard-card">
-        <span class="icon icon--lg" aria-hidden="true">{{ card.icon }}</span>
+        <span class="dashboard-card__icon"><span class="icon icon--lg" aria-hidden="true">{{ card.icon }}</span></span>
         <span class="dashboard-card__count">{{ card.count }}</span>
         <span class="dashboard-card__label">{{ card.label }}</span>
       </a>
     }
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-panel chart-panel--wide">
+      <div class="chart-panel__header">
+        <span class="chart-panel__icon"><span class="icon icon--sm" aria-hidden="true">bar_chart</span></span>
+        <h2>Content Overview</h2>
+      </div>
+      <app-bar-chart [data]="contentChartData()" />
+    </div>
+
+    <div class="chart-panel">
+      <div class="chart-panel__header">
+        <span class="chart-panel__icon"><span class="icon icon--sm" aria-hidden="true">donut_large</span></span>
+        <h2>Leads by Status</h2>
+      </div>
+      <app-donut-chart [data]="leadsStatusData()" />
+    </div>
+
+    <div class="chart-panel">
+      <div class="chart-panel__header">
+        <span class="chart-panel__icon"><span class="icon icon--sm" aria-hidden="true">pie_chart</span></span>
+        <h2>Projects by Category</h2>
+      </div>
+      <app-donut-chart [data]="projectCategoryData()" />
+    </div>
+
+    <div class="chart-panel chart-panel--wide">
+      <div class="chart-panel__header">
+        <span class="chart-panel__icon"><span class="icon icon--sm" aria-hidden="true">show_chart</span></span>
+        <h2>Leads — Last 14 Days</h2>
+      </div>
+      <app-trend-chart [points]="leadsTrendData()" />
+    </div>
   </div>
 }
